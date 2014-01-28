@@ -1,0 +1,41 @@
+.inv_h{
+    font-family:Verdana, Geneva, sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+} 
+.inv_cont{
+    padding:15px 0px 15px 0px;
+}
+.inv_p{
+    border-right: solid 1px;
+}
+.inv_p p{
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 12px !important;
+}
+.inv_pp p{
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 12px !important;
+}
+.table{
+    font-size: 11px;
+    
+}
+.table thead{
+    font-weight: bold;
+     border:solid 1px; 
+}
+.table thead td{
+    border:solid 1px; 
+}
+.table tbody td {
+    border-left: solid 1px;
+    border-right: solid 1px;
+}
+.table td{
+    padding: 4px !important;
+}
