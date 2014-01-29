@@ -604,9 +604,11 @@
 	
 	/* bootbox */
 	.bootbox.modal {overflow-y:auto}
-	.bootbox-body {padding:20px 0;font-size:14px}
+	.bootbox-body {text-align: center !important ;font-size:17px}
 	.bootbox-body .lead {margin-bottom:0}
-	
+        .modal-dialog .modal-content{
+            border: solid 3px #006600 !important;
+        }
 	/* chat */
 	.chat_app .table > tbody > tr > td {border:none;padding:0}
 	.chat_app .stat {width:12px;height:12px;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;display:inline-block;border-width:1px;border-style:solid;margin-right:10px;border:2px solid #fff !important}
