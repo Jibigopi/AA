@@ -161,7 +161,7 @@ class Stock Extends CI_Controller
                                                $pallet_price=$this->input->post('pallet_sales_price');
                                                $product=  $this->input->post('grain_id');
                                                  $this->load->model('stocks');
-							$this->stocks->update_stocks($guid,$data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product);	
+							$this->stocks->update_stocks($guid,$data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product,$this->input->post('case_label'),$this->input->post('pallet'),$this->input->post('location_name_add'),$this->input->post('stage'));	
                                                         echo "TRUE";                                                       
                                         }else{							
 							 echo 'FALSE';
@@ -175,6 +175,8 @@ class Stock Extends CI_Controller
 	    if($this->input->post('grain_id')){
 					$this->form_validation->set_rules('supplier_id','supplier_id', 'required');	
 					$this->form_validation->set_rules('grain_id','grain_id', 'required');	
+					$this->form_validation->set_rules('case_label','case_label', 'required');	
+					$this->form_validation->set_rules('pallet','pallet', 'required');	
 					//$this->form_validation->set_rules('stage','stage', 'required');							
 					$this->form_validation->set_rules('stock_id','stock_id', 'required');							
 					$this->form_validation->set_rules('no_of_unit','no_of_unit', 'required');							
@@ -230,7 +232,7 @@ class Stock Extends CI_Controller
 						 $this->load->model('stocks');
                                                  if($this->stocks->already($this->input->post('stock_id'))!=FALSE){ 
                                                       echo "TRUE";
-                                                     $this->stocks->add_stock($data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product);
+                                                     $this->stocks->add_stock($data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product,$this->input->post('case_label'),$this->input->post('pallet'),$this->input->post('location_name_add'),$this->input->post('stage'));
                                                 
                                                  }else{
                                                  echo "alredy";

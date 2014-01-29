@@ -31,13 +31,14 @@ class Stocks extends CI_model{
 			return TRUE;
 		}
 	}
-   function add_stock($data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product){
+   function add_stock($data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product,$case_label,$pallet_code,$location,$stage){
               $this->db->insert('stock',$data);
                 $id=  $this->db->insert_id();
                 $guid=array('guid'=>  md5('stock'.$id));
                 $this->db->where('id',$id);
                 $this->db->update('stock',$guid);
-                $this->db->select()->from('inventory_stock')->where('inventory_id',$product);
+                $where=array('inventory_id'=>$product,'case_label'=>$case_label,'pallet_number'=>$pallet_code,'location'=>$location,'stage'=>$stage);
+                $this->db->select()->from('inventory_stock')->where($where);
                 $sql=  $this->db->get();
                 if($sql->num_rows()>0){
                     foreach ($sql->result() as $row){
@@ -45,12 +46,12 @@ class Stocks extends CI_model{
                         $case=$unit+$row->case;
                         $pallet=$pallet+$row->pallet;
                     }
-                    $this->db->where('inventory_id',$product);
-                     $this->db->update('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price));
+                    $this->db->where($where);
+                     $this->db->update('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price,'case_label'=>$case_label,'pallet_number'=>$pallet_code,'location'=>$location,'stage'=>$stage));
                     
                 }else{
                     
-                    $this->db->insert('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price));
+                    $this->db->insert('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price,'case_label'=>$case_label,'pallet_number'=>$pallet_code,'location'=>$location,'stage'=>$stage));
                 }
       
          $this->db->select()->from('master')->where('name','inventory');
@@ -228,21 +229,31 @@ class Stocks extends CI_model{
                  }
 		 return $data;
 	}
-        function update_stocks($guid,$data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product){
+        function update_stocks($guid,$data,$unit,$unit_price,$case,$case_price,$pallet,$pallet_price,$product,$case_label,$pallet_code,$location,$stage){
             $this->db->select()->from('stock')->where('guid',$guid);
             $ssql=  $this->db->get();
             $ou;
             $oc;
             $op;
+            $old_pallet_number;
+            $old_case_label;
+            $old_location;
+            $old_stage;
+            $old_product;
             foreach ($ssql->result() as $row){
                 $ou=$row->no_of_unit;
                 $oc=$row->no_case;
                 $op=$row->no_pallet;
+                $old_case_label=$row->case_label;
+                $old_pallet_number=$row->pallet_number;
+                $old_location=$row->location;
+                $old_stage=$row->stage;
+                $old_product=$row->grain_id;
             }
             $this->db->where('guid',$guid);           
             $this->db->update('stock',$data);
-            
-            $this->db->select()->from('inventory_stock')->where('inventory_id',$product);
+              $where=array('inventory_id'=>$old_product,'case_label'=>$old_case_label,'pallet_number'=>$old_pallet_number,'location'=>$old_location,'stage'=>$old_stage);
+            $this->db->select()->from('inventory_stock')->where($where);
                 $sql=  $this->db->get();
                 if($sql->num_rows()>0){
                     foreach ($sql->result() as $row){
@@ -250,12 +261,12 @@ class Stocks extends CI_model{
                         $case=$unit+$row->case-$oc;
                         $pallet=$pallet+$row->pallet-$op;
                     }
-                    $this->db->where('inventory_id',$product);
-                     $this->db->update('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price));
+                    $this->db->where($where);
+                     $this->db->update('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price,'case_label'=>$case_label,'pallet_number'=>$pallet_code,'location'=>$location,'stage'=>$stage));
                     
                 }else{
                     
-                    $this->db->insert('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price));
+                    $this->db->insert('inventory_stock',array('inventory_id'=>$product,'unit'=>$unit,'unit_price'=>$unit_price,'case'=>$case,'case_price'=>$case_price,'pallet'=>$pallet,'pallet_price'=>$pallet_price,'case_label'=>$case_label,'pallet_number'=>$pallet_code,'location'=>$location,'stage'=>$stage));
                 }
             
             
