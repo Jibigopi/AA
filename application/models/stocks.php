@@ -302,18 +302,51 @@ class Stocks extends CI_model{
                 return $query->result_array();        
 	}
         function stock_level_data_table($end,$start,$order,$like,$product,$stage,$location){
-	        $this->db->select('stock.*,')->from('stock');
-                $this->db->join('grains', 'stock.grain_id=grains.guid','left');
-                $this->db->join('storage_location', 'stock.location=storage_location.id','left');
-                $this->db->join('supplier', 'stock.supplier=supplier.id','left');
+	        $this->db->select('inventory_stock.*,storage_location.name as lname,grains.name as product_name,grains.sku,grains.gcode')->from('inventory_stock');
+                $this->db->join('grains', 'inventory_stock.inventory_id=grains.guid','right');
+                $this->db->join('storage_location', 'inventory_stock.location=storage_location.id','left');
                 $this->db->limit($end,$start); 
                //$this->db->order_by($order);
-                $this->db->like('stage',$stage);
-                $this->db->like($like);     
+               
+                if($location!='0'){
+                     $this->db->like('location',$location);
+                }
+                if($stage!='0'){
+                     $this->db->like('stage',$stage);
+                }
+              
+                if($product!='0'){
+                     $this->db->like('inventory_id',$product);
+                }
+              
+                
                 $query=$this->db->get();
                 return $query->result_array();        
 	}
-         function count_stock($stage){
+        
+        function stock_level_count($end,$start,$order,$like,$product,$stage,$location){
+              $this->db->select('inventory_stock.*,storage_location.name as lname,grains.name as product_name,grains.sku,grains.gcode')->from('inventory_stock');
+                $this->db->join('grains', 'inventory_stock.inventory_id=grains.guid','right');
+                $this->db->join('storage_location', 'inventory_stock.location=storage_location.id','left');
+                $this->db->limit($end,$start); 
+               //$this->db->order_by($order);
+               
+                if($location!='0'){
+                     $this->db->like('location',$location);
+                }
+                if($stage!='0'){
+                     $this->db->like('stage',$stage);
+                }
+              
+                if($product!='0'){
+                     $this->db->like('inventory_id',$product);
+                }
+              
+                
+                $query=$this->db->get();
+                return $query->num_rows(); 
+        }
+        function count_stock($stage){
 		$this->db->select()->from('stock')->where('stage',$stage);
 		$sql=$this->db->get();
 		$count=0;

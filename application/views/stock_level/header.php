@@ -46,43 +46,38 @@
                     $("#stage").select2('data', {id:0,text:'None' });
                     $('#stage_id').val(0);              
                     stage=0;
+                    
                 }
                 if(location==""){
                     $("#location").select2('data', {id:0,text:'None' });
                     $('#location_id').val(0);
                     location=0;
                 }
+                
+               get_data_table(location,stage,product);
+            }
+            function clear_search(){
+                    $("#product").select2('data', {id:0,text:'None' });
+                    $('#product_id').val(0); 
+                    $("#stage").select2('data', {id:0,text:'None' });
+                    $('#stage_id').val(0);
+                    $("#location").select2('data', {id:0,text:'None' });
+                    $('#location_id').val(0);
+                    data_table();
+            }
+           function get_data_table(location,stage,product){
                   $('#dt_table_tools').dataTable({
+                                      "bServerSide": true,
+				      "bDestroy": true,
                                       "bProcessing": true,
-				      "bServerSide": true,
-                                      "sAjaxSource": "<?php echo base_url() ?>index.php/stage/data_table/"+location+"/"+stage+'/'+product,
+                                      "sAjaxSource": "<?php echo base_url() ?>index.php/stock_level/data_table/"+location+"/"+stage+'/'+product,
                                        aoColumns: [  
                                     
-         { "bVisible": false} , {	"sName": "ID",
-                   						"bSearchable": false,
-                   						"bSortable": false,
-                                                                
-                   						"fnRender": function (oObj) {
-                   							return "<input type=checkbox value='"+oObj.aData[0]+"' >";
-								},
-								
-								
-							},
+         { "bVisible": false} , 
         
-        null, 
+        null,  null,  null,  null,  null,null,null, null, null
 
- 							{	"sName": "ID1",
-                   						"bSearchable": false,
-                   						"bSortable": false,
-                                                                
-                   						"fnRender": function(oObj) {
-                                                                
-                                                                     return '<a data-toggle="modal"  href="#edit_stage" onclick=edit_stage("'+oObj.aData[3]+'"); ><span data-toggle="tooltip" class="label label-success hint--top hint--error" data-hint="EDIT"><i class="icon-edit"></i></span> </a>'+"&nbsp&nbsp;<a href=javascript:user_function('"+oObj.aData[3]+"'); ><span data-toggle='tooltip' class='label label-danger hint--top hint--error' data-hint='DELETE'><i class='icon-trash'></i></span> </a>";
-                                                                
-                                                                },
-								
-								
-							},
+ 							
 
  							
 
@@ -94,14 +89,14 @@
             
 	$(document).ready(function() {
                                 
-                 data_table();
+                 clear_search();
                                    
                                    // inventory stage
                                      
         $('#stage').change(function() {
-                   var guid = $('#stage').select2('data').id;
+                   var guid = $('#stage').select2('data').text;
                 $('#stage_id').val(guid);
-                data_table();
+              data_table();
           });
       $('#stage').select2({
                 placeholder: "Search Location",
@@ -141,6 +136,7 @@
                    var guid = $('#location').select2('data').id;
                 $('#location_id').val(guid);
                 data_table();
+               
           });
       $('#location').select2({
                 placeholder: "Search Location",
@@ -179,6 +175,7 @@
                    var guid = $('#product').select2('data').id;
                 $('#product_id').val(guid);
                 data_table();
+               
           });
           function format_grain(sup) {
             if (!sup.id) return sup.text; // optgroup        

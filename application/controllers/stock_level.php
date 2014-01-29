@@ -24,7 +24,8 @@ class Stock_level Extends CI_Controller
          }  
     }
     function data_table($location,$stage,$product){
-		$aColumns = array( 'id','name','name', 'id', );	
+      
+		$aColumns = array( 'stage','stage','lname','product_name','sku','pallet_number','case_label','unit','case','pallet', 'id', );	
 		$start = "";
 			$end="";
 		
@@ -57,9 +58,9 @@ class Stock_level Extends CI_Controller
 			 $this->load->model('stocks');		   
 			 $rResult1 = $this->stocks->stock_level_data_table($end,$start,$order,$like,$product,$stage,$location);
 		   
-		$iFilteredTotal =$this->stocks->count();
+		$iFilteredTotal =$this->stocks->stock_level_count($end,$start,$order,$like,$product,$stage,$location);
 		
-		$iTotal =$this->stocks->count();
+		$iTotal =$this->stocks->stock_level_count($end,$start,$order,$like,$product,$stage,$location);
 		
 		$output1 = array(
 			"sEcho" => intval($_GET['sEcho']),
@@ -95,8 +96,10 @@ class Stock_level Extends CI_Controller
             if($name!=""){
                $this->load->model('stocks');
                $data=$this->stocks->inventory_stage($name);    
-               echo json_encode($data);
+              
            }
+        
+            echo json_encode($data);
    }
     
     
