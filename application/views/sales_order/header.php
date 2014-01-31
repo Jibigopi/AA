@@ -915,17 +915,15 @@ function Sales_order_number(){
                           }});
 }
 function get_product_stock(){
-var type=$('#product_type').val();
-if(type==0){
-     bootbox.alert('Please Select Product Type');
-}else{
-if(!isNaN($('#parsley_reg #quantity').val()) && $('#parsley_reg #quantity').val()!="" ){
-   var stock=$('#parsley_reg #'+type+'_stock').val();
-   var price=$('#parsley_reg #'+type+'_price').val();
-   var quantity=$('#parsley_reg #quantity').val();
-       if(parseFloat(quantity) <= parseFloat(stock) ){
-      
-   console.log(type+stock+price);
+    var type=$('#parsley_reg #product_type').val();
+    if(type==0){
+         bootbox.alert('Please Select Product Type');
+    }else{
+    if(!isNaN($('#parsley_reg #quantity').val()) && $('#parsley_reg #quantity').val()!="" ){
+       var stock=$('#parsley_reg #'+type+'_stock').val();
+       var price=$('#parsley_reg #'+type+'_price').val();
+       var quantity=$('#parsley_reg #quantity').val();
+           if(parseFloat(quantity) <= parseFloat(stock) ){
    
    $('#parsley_reg #demo_total_price').val(quantity*price)
    } else{ bootbox.alert('This Product Dont Have This Much Of Stock');
@@ -939,7 +937,11 @@ if(!isNaN($('#parsley_reg #quantity').val()) && $('#parsley_reg #quantity').val(
 }
 }
 function change_product_type(){
-    alert('jibi');
+   
+     var type=$('#parsley_reg #product_type').val();
+     var price=$('#parsley_reg #'+type+'_price').val();
+     $('#parsley_reg #demo_price').val(price);
+     get_product_stock();
 }
 
 </script>	

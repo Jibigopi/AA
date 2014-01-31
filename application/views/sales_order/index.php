@@ -448,7 +448,7 @@
                                                                                                     <div class="form-group">
 													<label for="grain">Product Type </label>
                                                                                                         <select name="product_type" id="product_type" class="form-control" onchange="change_product_type()" >
-                                                                                                            <option value="0">Select</option> 
+                                                                                                            <option value="0">None</option> 
                                                                                                             <option value="unit">Unit</option> 
                                                                                                             <option value="case">Case</option> 
                                                                                                             <option value="pallet">Pallet</option> 
