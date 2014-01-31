@@ -167,7 +167,8 @@
                   $('#loading').modal('show');
                  
                    var guid = $('#parsley_reg #product').select2('data').id;
-                     
+              var name=$('#parsley_reg #product').select2('data').text;
+                      $('#parsley_reg #product_name').val(name);
                   if($('#stage_id').val()!=""){
                       var stage=$('#stage_id').val();
                         $.ajax({                                      
@@ -926,13 +927,16 @@ function get_product_stock(){
            if(parseFloat(quantity) <= parseFloat(stock) ){
    
    $('#parsley_reg #demo_total_price').val(quantity*price)
+   $('#parsley_reg #total_price').val(quantity*price)
    } else{ bootbox.alert('This Product Dont Have This Much Of Stock');
         $('#parsley_reg #quantity').val('');
         $('#parsley_reg #demo_total_price').val('');
+        $('#parsley_reg #total_price').val('');
    }
 }else{
     $('#parsley_reg #quantity').val('');
       $('#parsley_reg #demo_total_price').val('');
+      $('#parsley_reg #total_price').val('');
 }
 }
 }
@@ -942,6 +946,17 @@ function change_product_type(){
      var price=$('#parsley_reg #'+type+'_price').val();
      $('#parsley_reg #demo_price').val(price);
      get_product_stock();
+}
+function add_new_item(){
+  if($('#parsley_reg #total_price').val()!="" && $('#parsley_reg #price').val()!="" && $('#parsley_reg #quantity').val()!="" ){
+      $('#parsley_reg #added_products').append('<div class="col col-lg-2"><input type="hidden" name="stage_list[]" value="'+$('#parsley_reg #stage_id').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #stage_id').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="product_list[]" value="'+$('#parsley_reg #product').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #product_name').val()+'" ></div>\n\
+                                                <div class="col col-lg-1" style="width:120px important"><input type="hidden" name="product_type[]" value="'+$('#parsley_reg #product_type').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #product_type').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="quantity_list[]" value="'+$('#parsley_reg #quantity').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #quantity').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="price_list[]" value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="total_list[]" value="'+$('#parsley_reg #total_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #total_price').val()+'" ></div>\n\
+                                               <div class="col col-lg-1" ><div class="form-group"> <a href="javascript:edit_item_product()" ><i class="icon icon-pencil icon-2x"></i> </a>&nbsp;&nbsp; <a href="" ><i class="icon icon-remove icon-2x "></i> </a> </div> </div> ')
+  }
 }
 
 </script>	

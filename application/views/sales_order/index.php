@@ -479,12 +479,12 @@
                                                                                                             'data-required'=>'true',
                                                                                                             'value'=>set_value('price'));
                                                                                                             echo form_input($demo_price)?>   
-                                                                                                        <input type="text" name="unit_price" id="unit_price">
-                                                                                                        <input type="text" name="unit_stock" id="unit_stock">
-                                                                                                        <input type="text" name="case_price" id="case_price">
-                                                                                                        <input type="text" name="case_stock" id="case_stock">
-                                                                                                        <input type="text" name="pallet_price" id="pallet_price">
-                                                                                                        <input type="text" name="pallet_stock" id="pallet_stock">
+                                                                                                        <input type="hidden" name="unit_price" id="unit_price">
+                                                                                                        <input type="hidden" name="unit_stock" id="unit_stock">
+                                                                                                        <input type="hidden" name="case_price" id="case_price">
+                                                                                                        <input type="hidden" name="case_stock" id="case_stock">
+                                                                                                        <input type="hidden" name="pallet_price" id="pallet_price">
+                                                                                                        <input type="hidden" name="pallet_stock" id="pallet_stock">
                                                                                                         
 												</div>
                                                                                                 </div>
@@ -498,22 +498,26 @@
                                                                                                             'data-required'=>'true',
                                                                                                             'value'=>set_value('total_price'));
                                                                                                             echo form_input($total_price)?>  
-                                                                                                        <input type="hidden" name="total_price" id="total_price">
+                                                                                                        <input type="text" name="total_price" id="total_price">
 													
 												</div>
                                                                                                 </div>
                                                                                                 <div class="col col-lg-1" >
                                                                                                      <div class="form-group">
 													<label for="total"><br></label>
-                                                                                                        <a href="" ><i class="icon icon-plus icon-2x"></i> </a>&nbsp;&nbsp;
+                                                                                                        <a href="javascript:add_new_item()" ><i class="icon icon-plus icon-2x"></i> </a>&nbsp;&nbsp;
                                                                                                         <a href="" ><i class="icon icon-refresh icon-2x "></i> </a>
                                                                                                      </div>
                                                                                                   </div>
                                                                                           <input type="hidden" name="product_id" id="product_id">
+                                                                                          <input type="hidden" name="product_name" id="product_name">
                                                                                           <input type="hidden" name="stage_id" id="stage_id">
                                                                                           
 													
                                                                                         </div>
+                                                                                            <div class="row" id="added_products">
+                                                                                                
+                                                                                            </div>
                                                                                     </div>
                                                                                        <div class='col col-lg-2'>
                                                                                           
