@@ -157,13 +157,14 @@ class Sales_order extends CI_Controller{
 					$this->form_validation->set_rules('recipient','recipient', 'required');							
 					$this->form_validation->set_rules('address','address', 'required');							
 					$this->form_validation->set_rules('product_id','product_id', 'required');																		
-					$this->form_validation->set_rules('tax','tax', 'required');							
-					$this->form_validation->set_rules('grand_total','grand_total', 'required');							
+					$this->form_validation->set_rules('tax','tax', 'required|max_length[10]|regex_match[/^[0-9]+$/]|xss_clean');							
+					//$this->form_validation->set_rules('grand_total','grand_total', 'required|max_length[10]|regex_match[/^[0-9]+$/]|xss_clean');							
 					$this->form_validation->set_rules('discount','discount', 'required');							
 					$this->form_validation->set_rules('payment','payment', 'required');							
+					$this->form_validation->set_rules('stage_id','stage_id', 'required');							
 					$this->form_validation->set_rules('description','description', 'required');							
-					$this->form_validation->set_rules('total_price','total_price', 'required');							
-					$this->form_validation->set_rules('grand_total','grand_total', 'required');							
+					$this->form_validation->set_rules('total_price','total_price', 'required|max_length[10]|regex_match[/^[0-9]+$/]|xss_clean');							
+					$this->form_validation->set_rules('grand_total','grand_total', 'required|max_length[10]|regex_match[/^[0-9]+$/]|xss_clean');							
 					if($this->form_validation->run()!=FALSE){
 						$data=array('number'=> $this->input->post('sales_order'),
 						 'date_created'=> $this->input->post('order_received_date'),
@@ -171,6 +172,7 @@ class Sales_order extends CI_Controller{
 						 'receipient'=> $this->input->post('recipient'),
 						 'address'=> $this->input->post('address'),
 						 'product'=> $this->input->post('product_id'),						
+						 'stage'=> $this->input->post('stage_id'),						
 						 'tax'=> $this->input->post('tax'),
 						 'discount'=> $this->input->post('discount'),
 						 'payment_term'=> $this->input->post('payment'),
@@ -242,11 +244,12 @@ class Sales_order extends CI_Controller{
         }
         function get_grain_details(){
             $data=array();
-              if($this->input->post('guid')){
+              if($this->input->post('guid')&&$this->input->post('stage')){
                     $data['sataus']='TRUE'  ;
                     $name=  $this->input->post('guid');
+                    $stage=  $this->input->post('stage');
                     $this->load->model('sales_orders');
-                    $data[]= $this->sales_orders->get_grains_details($name);            
+                    $data[]= $this->sales_orders->get_grains_details($name,$stage);            
               }else{
                   // $data['sataus']='FALSE'  ;
               }

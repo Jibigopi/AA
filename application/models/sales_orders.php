@@ -131,17 +131,15 @@ class Sales_orders extends CI_model{
         }
         return $data;
     }
-     function get_grains_details($name){
-        $this->db->select()->from('grains')->where('name',$name);
+     function get_grains_details($guid,$stage){
+        $this->db->select()->from('grains')->where('guid',$guid);
         $sql=  $this->db->get();
-        $pr_id;
+        
         if($sql->num_rows()>0){
             $data['invalid']='TRUE';
-            foreach ($sql->result() as $row){
-                $pr_id=$row->guid;
-            $data[]= $row;
-            }   
-              $this->db->select()->from('inventory_stock')->where('inventory_id',$pr_id);
+            $data[]= $sql->result();
+             
+              $this->db->select()->from('inventory_stock')->where('inventory_id',$guid)->where('stage',$stage);
             $ssql=  $this->db->get();
              if($ssql->num_rows()>0){
                  $data['stock']='TRUE';

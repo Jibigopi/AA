@@ -164,12 +164,17 @@
                 
                 
                  $('#parsley_reg #product').change(function() {
-                   var guid = $('#parsley_reg #product').select2('data').text;
-                  
+                  $('#loading').modal('show');
+                 
+                   var guid = $('#parsley_reg #product').select2('data').id;
+                     
+                  if($('#stage_id').val()!=""){
+                      var stage=$('#stage_id').val();
                         $.ajax({                                      
                         url: "<?php echo base_url('index.php/sales_order/get_grain_details') ?>",                      
                         data:{
-                            guid: guid
+                            guid: guid,
+                            stage:stage        
                         },	
                         type:'POST',
                         dataType: 'json',               
@@ -178,61 +183,56 @@
                           $('#parsley_reg #h_price').val(data[0][0]['sales_price']);
                           $('#parsley_reg #price').val(data[0][0]['sales_price']);
                           $('#parsley_reg #product_id').val(data[0][0]['guid']);
-                          
+                       
                    if(data[0]['stock']==='TRUE'){
+                       
                           $('#parsley_reg #unit_price').val(data[0][1]['unit_price']);
-                          $('#parsley_reg #unit_price_o').val(data[0][1]['unit_price']);
                           $('#parsley_reg #unit_stock').val(data[0][1]['unit']);
                           
                           $('#parsley_reg #case_price').val(data[0][1]['case_price']);
-                          $('#parsley_reg #case_price_o').val(data[0][1]['case_price']);
                           $('#parsley_reg #case_stock').val(data[0][1]['case']);
                           
                           $('#parsley_reg #pallet_price').val(data[0][1]['pallet_price']);
-                          $('#parsley_reg #pallet_price_o').val(data[0][1]['pallet_price']);
                           $('#parsley_reg #pallet_stock').val(data[0][1]['pallet']);
+                           $('#loading').modal('hide');
                           }else{
-                          $('#parsley_reg #unit_stock').val('');
-                       
-                          $('#parsley_reg #case_stock').val('');
-                          
-                          $('#parsley_reg #pallet_stock').val('');
-                          
-                          
-                                  $('#parsley_reg #unit_price').val('');
-                                  $('#parsley_reg #unit_price_o').val('');
-                                  $('#parsley_reg #no_of_unit').val('');
-                                  $('#parsley_reg #total_price_for_unit').val('');
-                                  $('#parsley_reg #total_price_for_unit_o').val('');
-                                 
-                                  $('#parsley_reg #case_price').val('');
-                                  $('#parsley_reg #case_price_o').val('');
-                                  $('#parsley_reg #no_of_case').val('');
-                                  $('#parsley_reg #total_price_for_case').val('');
-                                  $('#parsley_reg #total_price_for_case_o').val('');
-                                  
-                                  $('#parsley_reg #pallet_price').val('');
-                                  $('#parsley_reg #pallet_price_o').val('');
-                                  $('#parsley_reg #no_of_pallet').val('');
-                                  $('#parsley_reg #total_price_for_pallet').val('');
-                                  $('#parsley_reg #total_price_for_pallet_o').val('');
-                                  
-                                  $('#parsley_reg #total_price_o').val('');
-                                  $('#parsley_reg #total_price').val('');
-                                  $('#parsley_reg #grand_total').val('');
-                                  $('#parsley_reg #grand_total_o').val('');
-                          
+                               $('#loading').modal('hide');
+                            $('#parsley_reg #unit_stock').val('');                       
+                            $('#parsley_reg #case_stock').val('');                          
+                            $('#parsley_reg #pallet_stock').val('');
+                            $('#parsley_reg #price').val('');
+                            $('#parsley_reg #case_price').val('');
+                            $('#parsley_reg #pallet_price').val('');
+                            
+                           $("#parsley_reg #product").select2('data', {id:'',text:'' });
+                                $('#parsley_reg #product_id').val('');
+                                $("#parsley_reg #product").focus();
                                bootbox.alert('This Product Out Stock');
                           }
                           
                         
                       } 
                     });   
+                    }else{
+                     $('#loading').modal('hide');
+                             $('#parsley_reg #unit_stock').val('');                       
+                             $('#parsley_reg #case_stock').val('');                          
+                             $('#parsley_reg #pallet_stock').val('');
+                             $('#parsley_reg #price').val('');
+                             $('#parsley_reg #case_price').val('');
+                             $('#parsley_reg #pallet_price').val('');
+                            
+                                $("#parsley_reg #product").select2('data', {id:'',text:'' });
+                                $('#parsley_reg #product_id').val('');
+                                $("#parsley_reg #product").focus();
+                      bootbox.alert('Please Select Prtcular Inventory Stage Of The Product');
+                    }
           });
         
       $('#parsley_reg #product').select2({
       
                 placeholder: "Search Product",
+                
                 ajax: {
                      url: '<?php echo base_url('index.php/stock/get_grains_details') ?>',
                      data: function(term, page) {
@@ -452,6 +452,58 @@
                     }
                 }
             });  
+            
+            //stage
+             $('#parsley_reg #stage').change(function() {
+                   var guid = $('#parsley_reg #stage').select2('data').text;
+                $('#stage_id').val(guid);
+                  $('#parsley_reg #unit_price').val('');
+                                $('#parsley_reg #unit_stock').val('');                       
+                                $('#parsley_reg #case_stock').val('');                          
+                                $('#parsley_reg #pallet_stock').val('');
+                                $('#parsley_reg #price').val('');
+                                $('#parsley_reg #case_price').val('');
+                                $('#parsley_reg #pallet_price').val('');
+                                $("#parsley_reg #product").select2('data', {id:'',text:'' });
+                                $('#parsley_reg #product_id').val('');
+                                $("#parsley_reg #product").focus();
+             
+          });
+      $('#parsley_reg #stage').select2({
+                placeholder: "Search Location",
+                ajax: {
+                     url: '<?php echo base_url('index.php/stock_level/get_stage_details') ?>',
+                     data: function(term, page) {
+                            return {types: ["exercise"],
+                                limit: -1,
+                                term: term
+                            };
+                     },
+                    type:'POST',
+                    dataType: 'json',
+                    quietMillis: 100,
+                    data: function (term) {
+                        return {
+                            term: term
+                        };
+                    },
+                    results: function (data) {
+                      var results = [];
+                      $.each(data, function(index, item){
+                        results.push({
+                          id: item.id,
+                          text: item.name
+                        });
+                      });
+                      return {
+                          results: results
+                      };
+                    }
+                }
+            });
+            
+            
+            
             });
         function user_function(guid){
              bootbox.confirm("Are you Sure To Delete This Sales Order", function(result) {
@@ -862,6 +914,34 @@ function Sales_order_number(){
                              $('#parsley_reg #sales_order_o').val(data);
                           }});
 }
+function get_product_stock(){
+var type=$('#product_type').val();
+if(type==0){
+     bootbox.alert('Please Select Product Type');
+}else{
+if(!isNaN($('#parsley_reg #quantity').val()) && $('#parsley_reg #quantity').val()!="" ){
+   var stock=$('#parsley_reg #'+type+'_stock').val();
+   var price=$('#parsley_reg #'+type+'_price').val();
+   var quantity=$('#parsley_reg #quantity').val();
+       if(parseFloat(quantity) <= parseFloat(stock) ){
+      
+   console.log(type+stock+price);
+   
+   $('#parsley_reg #demo_total_price').val(quantity*price)
+   } else{ bootbox.alert('This Product Dont Have This Much Of Stock');
+        $('#parsley_reg #quantity').val('');
+        $('#parsley_reg #demo_total_price').val('');
+   }
+}else{
+    $('#parsley_reg #quantity').val('');
+      $('#parsley_reg #demo_total_price').val('');
+}
+}
+}
+function change_product_type(){
+    alert('jibi');
+}
+
 </script>	
 </head>
 <body class="sidebar_narrow boxed pattern_1">
