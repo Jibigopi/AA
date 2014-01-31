@@ -27,7 +27,43 @@
 	<script type="text/javascript" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/jquery.dataTables.js"></script>
         <script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/DT_bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>admin/js/typeahead.js"></script> 
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#customers').dataTable({
+                                      "bProcessing": true,
+				      "bServerSide": true,
+                                      "sAjaxSource": "<?php echo base_url() ?>index.php/contact/customer_data_table",
+                                       aoColumns: [  
+                                    
+         { "bVisible": false} , 
         
+        null, null, null, null, null
+                                                    ]
+		                         } );
+            $('#suppliers').dataTable({
+                                      "bProcessing": true,
+				      "bServerSide": true,
+                                      "sAjaxSource": "<?php echo base_url() ?>index.php/contact/supplier_data_table",
+                                       aoColumns: [  
+                                    
+         { "bVisible": false} , 
+        
+        null, null, null, null, null
+                                                    ]
+		                         } );
+            $('#location').dataTable({
+                                      "bProcessing": true,
+				      "bServerSide": true,
+                                      "sAjaxSource": "<?php echo base_url() ?>index.php/contact/location_data_table",
+                                       aoColumns: [  
+                                    
+         { "bVisible": false} , 
+        
+        null, null, null, null
+                                                    ]
+		                         } );
+                                         });
+        </script>
 	
 </head>
 <body class="sidebar_narrow boxed pattern_1">

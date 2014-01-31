@@ -12,16 +12,24 @@
 						<!-- main content -->
                                                 <br>
 						
-						 
 					<div class="row">
-						<div class="col-sm-12">
-								<div class="tabbable ">
-										
-										<div class="tab-content">	
-												<div id="tb3_a" class="tab-pane active"> <h4>Supplier Contact</h4>
-													<div class="panel panel-default">
-                                                                                                           
-									                                  <table id="dt_table_tools" class="table table-striped" style="width: 100%"><thead>
+							<div class="col-sm-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">Contacts</h4>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-sm-12">
+												<ul class="nav nav-tabs">
+													<li class="active"><a data-toggle="tab" href="#tsuppliers">Suppliers</a></li>
+													<li><a data-toggle="tab" href="#tbb_b">Customers</a></li>
+													<li><a data-toggle="tab" href="#tbb_c">Storage Location</a></li>
+												</ul>
+												<div class="tab-content">
+													<div id="tsuppliers" class="tab-pane active">
+														
+                                                                                                                  <table id="suppliers" class="table table-striped" style="width: 100%"><thead>
                                                                                                             <tr>
                                                                                                               <th>SL NO</th>
                                                                                                               <th>Name</th>
@@ -32,73 +40,58 @@
                                                                                                               </tr>
                                                                                                             </thead>
                                                                                                             <tbody style="padding-bottom: 100px !important"> 
-                                                                                                                <?php $i=0; foreach ($supplier as $srow){?>
-                                                                                                                <tr><td><?php echo ++$i; ?></td><td><?php echo $srow->name ?></td><td><?php echo $srow->company ?></td><td><?php echo $srow->address ?></td><td><?php echo $srow->email ?></td><td><?php echo $srow->phone ?></td></tr>
-                                                                                                                <?php } ?>
+                                                                                                              
                                                                                                              </tbody>
 
                                                                                                           </table>
-                                                                                                         
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-										<div class="tab-content">	
-												<div id="tb3_a" class="tab-pane active"> <h4>Customer Contact</h4>
-													<div class="panel panel-default">
-                                                                                                           
-									                                  <table id="dt_table_tools" class="table table-striped" style="width: 100%"><thead>
-                                                                                                            <tr>
-                                                                                                              <th>SL NO</th>
-                                                                                                              <th>Name</th>
-                                                                                                              <th>Customer Type</th>    
-                                                                                                              <th>Address</th>                                                                                        
-                                                                                                              <th>Email  </th>                                                                                                             
-                                                                                                              <th>Phone  </th>      
-                                                                                                              </tr>
-                                                                                                            </thead>
-                                                                                                            <tbody style="padding-bottom: 100px !important"> 
-                                                                                                                <?php $i=0; foreach ($customer as $crow){?>
-                                                                                                                <tr><td><?php echo ++$i; ?></td><td><?php echo $crow->name ?></td><td><?php echo $crow->customer_type ?></td><td><?php echo $crow->address ?></td><td><?php echo $crow->email ?></td><td><?php echo $crow->phone ?></td></tr>
-                                                                                                                <?php } ?>
-                                                                                                             </tbody>
-
-                                                                                                          </table>
-                                                                                                         
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-										<div class="tab-content">	
-												<div id="tb3_a" class="tab-pane active"> <h4>Warehouse Contact</h4>
-													<div class="panel panel-default">
-                                                                                                           
-									                                  <table id="dt_table_tools" class="table table-striped" style="width: 100%"><thead>
+                                                                                                                
+													</div>
+													<div id="tbb_b" class="tab-pane">
+														 <table id="customers" class="table table-striped" style="width: 100%"><thead>
                                                                                                             <tr>
                                                                                                               <th>SL NO</th>
                                                                                                               <th>Name</th>   
+                                                                                                              <th>Customer Type</th>    
+                                                                                                               <th>Address  </th>
+                                                                                                               <th>Email  </th>    
+                                                                                                              <th>Phone  </th>                                                                                                             
+                                                                                                                
+                                                                                                                   
+                                                                                                              </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody style="padding-bottom: 100px !important"> 
+                                                                                                               
+                                                                                                             </tbody>
+
+                                                                                                          </table>
+													</div>
+													<div id="tbb_c" class="tab-pane">
+														 <table id="location" class="table table-striped" style="width: 100%"><thead>
+                                                                                                            <tr>
+                                                                                                              <th>SL NO</th>
+                                                                                                              <th>Name</th>
                                                                                                               <th>Address</th>                                                                                        
                                                                                                               <th>Email  </th>                                                                                                             
                                                                                                               <th>Phone  </th>      
                                                                                                               </tr>
                                                                                                             </thead>
                                                                                                             <tbody style="padding-bottom: 100px !important"> 
-                                                                                                                <?php $i=0; foreach ($location as $srow){?>
-                                                                                                                <tr><td><?php echo ++$i; ?></td><td><?php echo $srow->name ?></td><td><?php echo $srow->contact ?></td><td><?php echo $srow->email ?></td><td><?php echo $srow->phone ?></td></tr>
-                                                                                                                <?php } ?>
+                                                                                                                
                                                                                                              </tbody>
 
                                                                                                           </table>
-                                                                                                         
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
 										
+										
+									</div>
 								</div>
-						</div>
-						
-						
-						
-
-					</div>
+							</div>
+						</div>	 
+					
 				</div>
 		
 			</section>
