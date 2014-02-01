@@ -168,6 +168,7 @@
                  
                    var guid = $('#parsley_reg #product').select2('data').id;
               var name=$('#parsley_reg #product').select2('data').text;
+                 $('#parsley_reg #product_id').val(guid);
                       $('#parsley_reg #product_name').val(name);
                   if($('#stage_id').val()!=""){
                       var stage=$('#stage_id').val();
@@ -183,7 +184,6 @@
                           {
                           $('#parsley_reg #h_price').val(data[0][0]['sales_price']);
                           $('#parsley_reg #price').val(data[0][0]['sales_price']);
-                          $('#parsley_reg #product_id').val(data[0][0]['guid']);
                        
                    if(data[0]['stock']==='TRUE'){
                        
@@ -224,7 +224,7 @@
                              $('#parsley_reg #pallet_price').val('');
                             
                                 $("#parsley_reg #product").select2('data', {id:'',text:'' });
-                                $('#parsley_reg #product_id').val('');
+                              $('#parsley_reg #product_id').val('');
                                 $("#parsley_reg #product").focus();
                       bootbox.alert('Please Select Prtcular Inventory Stage Of The Product');
                     }
@@ -916,6 +916,7 @@ function Sales_order_number(){
                           }});
 }
 function get_product_stock(){
+if($('#parsley_reg #product_id').val()!=""){
     var type=$('#parsley_reg #product_type').val();
     if(type==0){
          bootbox.alert('Please Select Product Type');
@@ -938,6 +939,11 @@ function get_product_stock(){
       $('#parsley_reg #demo_total_price').val('');
       $('#parsley_reg #total_price').val('');
 }
+}}else{
+   $('#parsley_reg #quantity').val('');
+      $('#parsley_reg #demo_total_price').val('');
+      $('#parsley_reg #total_price').val('');
+  bootbox.alert('Please Select Product ');
 }
 }
 function change_product_type(){
@@ -947,18 +953,109 @@ function change_product_type(){
      $('#parsley_reg #demo_price').val(price);
      get_product_stock();
 }
+function clear_selected_product_details(){
+        $("#parsley_reg #product").select2('data', {id:'',text:'Search Product'});
+        $('#parsley_reg #product_id').val('');
+        $("#parsley_reg #stage").select2('data', {id:'',text:'Search Stage'});
+        $('#parsley_reg #stage_id').val('');
+        $('#parsley_reg #unit_stock').val('');                       
+        $('#parsley_reg #case_stock').val('');                          
+        $('#parsley_reg #pallet_stock').val('');
+        $('#parsley_reg #price').val('');
+        $('#parsley_reg #demo_price').val('');
+        $('#parsley_reg #case_price').val('');
+        $('#parsley_reg #pallet_price').val('');
+        $('#parsley_reg #total_price').val('');
+        $('#parsley_reg #demo_total_price').val('');
+        $('#parsley_reg #quantity').val('');
+                                
+}
+    
 function add_new_item(){
   if($('#parsley_reg #total_price').val()!="" && $('#parsley_reg #price').val()!="" && $('#parsley_reg #quantity').val()!="" ){
-      $('#parsley_reg #added_products').append('<div class="col col-lg-2"><input type="hidden" name="stage_list[]" value="'+$('#parsley_reg #stage_id').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #stage_id').val()+'" ></div>\n\
-                                                <div class="col col-lg-2"><input type="hidden" name="product_list[]" value="'+$('#parsley_reg #product').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #product_name').val()+'" ></div>\n\
-                                                <div class="col col-lg-1" style="width:120px important"><input type="hidden" name="product_type[]" value="'+$('#parsley_reg #product_type').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #product_type').val()+'" ></div>\n\
-                                                <div class="col col-lg-2"><input type="hidden" name="quantity_list[]" value="'+$('#parsley_reg #quantity').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #quantity').val()+'" ></div>\n\
-                                                <div class="col col-lg-2"><input type="hidden" name="price_list[]" value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ></div>\n\
-                                                <div class="col col-lg-2"><input type="hidden" name="total_list[]" value="'+$('#parsley_reg #total_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #total_price').val()+'" ></div>\n\
-                                               <div class="col col-lg-1" ><div class="form-group"> <a href="javascript:edit_item_product()" ><i class="icon icon-pencil icon-2x"></i> </a>&nbsp;&nbsp; <a href="" ><i class="icon icon-remove icon-2x "></i> </a> </div> </div> ')
+      if(document.getElementById('id_'+$('#parsley_reg #stage_id').val()+'_'+$('#parsley_reg #product_type').val()+'_'+$('#parsley_reg #product').val())){
+      
+                alert('update');
+      }else{
+      $('#parsley_reg #added_products').append('<div id="id_'+$('#parsley_reg #stage_id').val()+'_'+$('#parsley_reg #product_type').val()+'_'+$('#parsley_reg #product').val()+'">\n\
+                                                <div class="col col-lg-2"><input type="hidden"  id="stage_id_'+$('#parsley_reg #product').val()+'" value="'+$('#parsley_reg #stage').val()+'" ><input type="hidden" name="stage_list[]" value="'+$('#parsley_reg #stage_id').val()+'" id="stage_name_'+$('#parsley_reg #product').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #stage_id').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="product_list[]" value="'+$('#parsley_reg #product').val()+'" id="p_id_'+$('#parsley_reg #product').val()+'"><input type="text" id="p_name_'+$('#parsley_reg #product').val()+'" class="form-control" disabled value="'+$('#parsley_reg #product_name').val()+'" ></div>\n\
+                                                <div class="col col-lg-1"><input type="hidden" name="product_type[]" value="'+$('#parsley_reg #product_type').val()+'" id="p_type_'+$('#parsley_reg #product').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #product_type').val()+'" style="width:120px important" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="quantity_list[]" value="'+$('#parsley_reg #quantity').val()+'" id="p_quty_'+$('#parsley_reg #product').val()+'"><input type="text" class="form-control" disabled value="'+$('#parsley_reg #quantity').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="price_list[]" id="p_price_'+$('#parsley_reg #product').val()+'" value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ></div>\n\
+                                                <div class="col col-lg-2"><input type="hidden" name="total_list[]" id="p_total_'+$('#parsley_reg #product').val()+'" value="'+$('#parsley_reg #total_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #total_price').val()+'" ></div>\n\
+                                               <div class="col col-lg-1" ><div class="form-group"> <a href=javascript:edit_item_product("'+$('#parsley_reg #product').val()+'") ><i class="icon icon-pencil icon-2x"></i> </a>&nbsp;&nbsp; <a href=javascript:remove_item("id_'+$('#parsley_reg #stage_id').val()+'_'+$('#parsley_reg #product_type').val()+'_'+$('#parsley_reg #product').val()+'") ><i class="icon icon-trash icon-2x "></i> </a> </div> </div> </div> ')
+    }
   }
 }
-
+function remove_item(guid){
+$('#parsley_reg #'+guid).remove();
+}
+function edit_item_product(guid){
+     $('#loading').modal('show');
+   // var productid=$('#parsley_reg #p_id_'+guid).val();
+    var productname=$('#parsley_reg #p_name_'+guid).val();
+//    var producttype=$('#parsley_reg #p_type_'+guid).val();
+var quty=$('#parsley_reg #p_quty_'+guid).val();
+   $('#parsley_reg #quantity').val(quty);
+   $('#parsley_reg #demo_total_price').val($('#parsley_reg #p_total_'+guid).val());
+   $('#parsley_reg #total_price').val($('#parsley_reg #p_total_'+guid).val());
+   $('#parsley_reg #demo_price').val($('#parsley_reg #p_price_'+guid).val());
+   $('#parsley_reg #price').val($('#parsley_reg #p_price_'+guid).val());
+   $('#parsley_reg #product_type').val($('#parsley_reg #p_type_'+guid).val());
+ 
+   var stage=$('#parsley_reg #stage_id_'+guid).val();
+   var stage_name=$('#parsley_reg #stage_name_'+guid).val();
+                   console.log(stage_name+guid);
+                       $.ajax({
+					   url: "<?php echo base_url('index.php/sales_order/get_grain_details') ?>",                      
+                        data:{
+                            guid: guid,
+                            stage:stage_name        
+                        },	
+                        type:'POST',
+                        dataType: 'json',               
+                        success: function(data)        
+                          { 
+                      if(data[0]['stock']==='TRUE'){
+                       
+                          $('#parsley_reg #unit_price').val(data[0][1]['unit_price']);
+                          $('#parsley_reg #unit_stock').val(data[0][1]['unit']);
+                          
+                          $('#parsley_reg #case_price').val(data[0][1]['case_price']);
+                          $('#parsley_reg #case_stock').val(data[0][1]['case']);
+                          
+                          $('#parsley_reg #pallet_price').val(data[0][1]['pallet_price']);
+                          $('#parsley_reg #pallet_stock').val(data[0][1]['pallet']);
+                          
+                          
+                           $("#parsley_reg #product").select2('data', {id:guid,text:productname});
+                           $('#parsley_reg #product_id').val(guid);
+                                  
+                                  
+                                $("#parsley_reg #stage").select2('data', {id:stage,text:stage_name});
+                                $('#parsley_reg #stage_id').val(stage_name);
+                           $('#loading').modal('hide');
+                          }else{
+                               $('#loading').modal('hide');
+                            $('#parsley_reg #unit_stock').val('');                       
+                            $('#parsley_reg #case_stock').val('');                          
+                            $('#parsley_reg #pallet_stock').val('');
+                            $('#parsley_reg #price').val('');
+                            $('#parsley_reg #case_price').val('');
+                            $('#parsley_reg #pallet_price').val('');
+                            
+                           $("#parsley_reg #product").select2('data', {id:'',text:'' });
+                                $('#parsley_reg #product_id').val('');
+                                $("#parsley_reg #product").focus();
+                               bootbox.alert('This Product Out Stock');
+                          }
+                          
+                       
+                          }
+				});
+                  
+}
 </script>	
 </head>
 <body class="sidebar_narrow boxed pattern_1">

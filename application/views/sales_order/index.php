@@ -498,7 +498,7 @@
                                                                                                             'data-required'=>'true',
                                                                                                             'value'=>set_value('total_price'));
                                                                                                             echo form_input($total_price)?>  
-                                                                                                        <input type="text" name="total_price" id="total_price">
+                                                                                                        <input type="hidden" name="total_price" id="total_price">
 													
 												</div>
                                                                                                 </div>
@@ -506,7 +506,7 @@
                                                                                                      <div class="form-group">
 													<label for="total"><br></label>
                                                                                                         <a href="javascript:add_new_item()" ><i class="icon icon-plus icon-2x"></i> </a>&nbsp;&nbsp;
-                                                                                                        <a href="" ><i class="icon icon-refresh icon-2x "></i> </a>
+                                                                                                        <a href="javascript:clear_selected_product_details()" ><i class="icon icon-refresh icon-2x "></i> </a>
                                                                                                      </div>
                                                                                                   </div>
                                                                                           <input type="hidden" name="product_id" id="product_id">
@@ -515,7 +515,7 @@
                                                                                           
 													
                                                                                         </div>
-                                                                                            <div class="row" id="added_products">
+                                                                                            <div class="row" id="added_products" style="margin-top: 20px">
                                                                                                 
                                                                                             </div>
                                                                                     </div>
@@ -607,4 +607,8 @@ $(document).ready(function() {
     }
     #parsley_ext .form-group input.error {
         border: 1px solid #CC0000 
-    }</style>
+    }
+    #added_products .row+.row{
+        margin-top: 0px !important;
+    }
+</style>

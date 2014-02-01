@@ -145,7 +145,9 @@ class Sales_orders extends CI_model{
                  $data['stock']='TRUE';
              foreach ($ssql->result() as $row){
               $data[]= $row;
-             }   }else{
+             }   
+             
+             }else{
                    $data['stock']='FALSE';
                  
              }
