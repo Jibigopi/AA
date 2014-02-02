@@ -505,7 +505,7 @@
                                                                                                 <div class="col col-lg-1" >
                                                                                                      <div class="form-group">
 													<label for="total"><br></label>
-                                                                                                        <a href="javascript:add_new_item()" ><i class="icon icon-plus icon-2x"></i> </a>&nbsp;&nbsp;
+                                                                                                        <a href="javascript:add_new_item()" id="add_new_item"><i class="icon icon-plus icon-2x"></i> </a> <a href="javascript:add_new_item()" style="display: none" id="edit_item" ><i class="icon icon-edit icon-2x"></i> </a>&nbsp;&nbsp;
                                                                                                         <a href="javascript:clear_selected_product_details()" ><i class="icon icon-refresh icon-2x "></i> </a>
                                                                                                      </div>
                                                                                                   </div>
@@ -610,5 +610,8 @@ $(document).ready(function() {
     }
     #added_products .row+.row{
         margin-top: 0px !important;
+    }
+    .display_none{
+        display: none;
     }
 </style>

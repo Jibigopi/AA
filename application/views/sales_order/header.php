@@ -992,6 +992,7 @@ function remove_item(guid){
 $('#parsley_reg #'+guid).remove();
 }
 function edit_item_product(guid){
+    $('add_new_item').addClass('display_none');
      $('#loading').modal('show');
    // var productid=$('#parsley_reg #p_id_'+guid).val();
     var productname=$('#parsley_reg #p_name_'+guid).val();
