@@ -771,6 +771,9 @@ $this->cart->destroy();
         $this->load->view('page',$data);
        
     }
+    function view_product(){
+        $this->load->view('sonorawheat');
+    }
 }
     
 ?>

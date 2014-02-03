@@ -33,7 +33,7 @@ nav{
     
 }
 h2{
-    font-size: 22px !important;
+    font-size: 20px !important;
     padding-left: 20px;
     
 }
@@ -92,4 +92,24 @@ header{
     font-weight: bold;
     border-radius: 5px;
     width: 60px;
+}
+.home_contant .active{
+    background: #ffffff !important;
+}
+.tab{
+    color: #000!important;
+}
+.nav-tabs a{
+    color: #666666!important;
+    font-size: 18px !important;
+    font-family: DesdemonaBlack;
+}
+.tab-content p{
+    padding: 25px 0px;
+    color: #000 !important;
+    text-justify: auto !important;
+    font-family: verdana;
+    font-size: 15px;
+    text-align: justify;
+    line-height: 20px;
 }

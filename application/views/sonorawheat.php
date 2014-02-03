@@ -39,13 +39,33 @@
             #wrapper {
     position: relative;
 }
-
+.home_contant .active{
+    background: #ffffff !important;
+}
+.tab{
+    color: #000!important;
+}
+.nav-tabs a{
+    color: #666666!important;
+    font-size: 18px !important;
+    font-family: DesdemonaBlack;
+}
+.tab-content p{
+    padding: 25px 0px;
+    color: #000 !important;
+    text-justify: auto !important;
+    font-family: verdana;
+    font-size: 15px;
+    text-align: justify;
+    line-height: 20px;
+}
         </style>
         <?php  if(!isset($_SESSION['user'])){ ?>
         <style type="text/css">
             .navbar-nav > li{
                 padding-left: 10.5px  !important;
             }
+            
         </style> 
 <?php } ?>
 </head>
@@ -110,18 +130,38 @@
              </div>
          </div>
          <div class="row home_contant" style="margin-top:15px; ">
-             <div class="col col-lg-5">
-                 Image
+             <div class="col col-lg-12">
+               <ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#Nutrition" data-toggle="tab">Nutrition</a></li>
+  <li><a href="#media" data-toggle="tab">Media</a></li>
+  <li><a href="#backers" data-toggle="tab">Bakers</a></li>
+  <li><a href="#kitchen" data-toggle="tab">Home kitchen</a></li>
+  <li><a href="#settings" data-toggle="tab">Shop</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active " id="home">
+      <div class="row">
+          <div class="col col-lg-4"></div>
+          <div class="col col-lg-8"><p>Sonora (CItr 3036) is a common wheat (Triticum aestivum ssp aestivum). It was selected from a landrace in Durango, Mexico. Sonora wheat might be the very first wheat successfully introduced onto the American continent soon after Columbus’s journey in 1492.The agricultural Native Americans</p></div>
+      </div>
+      
+      
+  </div>
+    <div class="tab-pane " id="Nutrition">
+        <div class="col-lg-12 text-center">
+        <img src="<?php echo base_url('uploads/nutrition/AA-GN-102.png'); ?>  ">
+        </div>
+    </div>
+  <div class="tab-pane" id="media">
+      
+  </div>
+  <div class="tab-pane" id="backers">...</div>
+  <div class="tab-pane" id="kitchen">...</div>
+  <div class="tab-pane" id="shop">...</div>
+</div>
              </div>
-             <div class="col col-lg-7 font" style="text-align: justify;font-size:18px">
-              Sonora (CItr 3036) is a common wheat (Triticum aestivum ssp
-aestivum). It was selected from a landrace in Durango, Mexico.
-Sonora wheat might be the very first wheat successfully introduced
-onto the American continent soon after Columbus’s journey in 1492.
-The agricultural Native Americans in Mexico used it to make whole
-wheat tortillas, and apparently liked the way it could be ground to a
-whole wheat flour on their metate.
-             </div>
+            
          </div>
          <div class="fotter fancy_font" style="margin-top: 79px;height: 160px;background:url(<?php echo base_url() ?>images/Footer_Img.png) ;color: #ffffff; ">
              <div class="row">
