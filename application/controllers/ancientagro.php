@@ -12,7 +12,7 @@ class Ancientagro Extends CI_Controller
     }
     function index()
     {
-       //$_SESSION['cart']=0;
+      
       $this->load->model('site_model');
       $this->load->model('menus');
       $data['parents'] =$this->menus->get_parent_menus();
