@@ -19,7 +19,7 @@ mb_internal_encoding('UTF-8');
 //    |   |   |   |- responsivefilemanager
 //    |   |   |   |   |- plugin.min.js
 
-$base_url="http://69.195.124.151/~ancieny4";  // DON'T TOUCH (base url (only domain) of site (without final /)).
+$base_url="http://www.ancientagro.com/";  // DON'T TOUCH (base url (only domain) of site (without final /)).
 
 
 $upload_dir = '/source/'; // path from base_url to base of upload folder (with start and final /)

@@ -18,7 +18,7 @@ src: url(../fonts/erasdust.ttf);
         padding-right: 5px;
     }
 body{
-    background:url("../images1/bg_left.jpg") repeat-y scroll left top, url("../images1/bg_right.jpg") repeat-y scroll right top, url("../images/bg.jpg") repeat scroll 0 0 #ffffff !important;
+    background:url("../images1/bg_left.jpg") repeat-y scroll left top, url("../images1/bg_right.jpg") repeat-y scroll right top, url("../oldpaper.jpg") repeat scroll 0 0 #ffffff !important;
 }
 .baner{
     background:url("../images/baner_left.png") repeat-y scroll left top, url("../images/baner_right.png") repeat-y scroll right top, url("../images/baner_back.png") !important;

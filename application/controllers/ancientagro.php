@@ -771,8 +771,15 @@ $this->cart->destroy();
         $this->load->view('page',$data);
        
     }
-    function view_product(){
-        $this->load->view('sonorawheat');
+    function view_product($guid){
+       $this->load->model('menus');
+        $data['parents'] =$this->menus->get_parent_menus();
+        $data['childs'] =$this->menus->get_child_menus();
+        $data['active']= $this->uri->segment(4);
+        $guid=  $this->uri->segment(3);
+        $this->load->model('site_model');
+        $data['row']=  $this->site_model->get_page_data($guid);
+        $this->load->view('page',$data);
     }
 }
     

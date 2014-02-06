@@ -188,7 +188,7 @@
          </script>
          <div class="row" style="margin-top:15px; ">
              <div class="col col-lg-12">
-                 <h2 class="font text-center"><img src="<?php echo base_url() ?>images/divider_left_h.png" style="padding-right: 50px;"> PRODUCTS <img src="<?php echo base_url() ?>images/divider_right_h.png" style="padding-left: 50px;"></h2>
+                 <h2 class="font text-center"><img src="<?php echo base_url() ?>images/divider_left_h.png" style="padding-right: 50px;"> SHOPPING <img src="<?php echo base_url() ?>images/divider_right_h.png" style="padding-left: 50px;"></h2>
              </div>
          </div>
          <div class="row home_contant" style="margin-top:15px; ">
@@ -237,14 +237,17 @@
          
 			</div>
 			
-			<div class="col col-lg-5">
+			
+			
+			
+         </div><div class="col col-lg-5" style="margin-left: 707px;margin-top: -173px">
 					<?php echo form_open('ancientagro/udpate_cart'); ?>
 
                             <table class="table table-striped " id="selected_product"  style="width:100%" border="0">
                                                     
 						<tr>
 						  <th>QTY</th>
-						  <th>Item Description</th>
+						  <th>Name</th>
 						  <th style="text-align:right">Item Price</th>
 						  <th style="text-align:right">Sub-Total</th>
 						</tr>
@@ -303,9 +306,6 @@
                                                     echo form_submit($check_out); ?><?php echo form_close(); ?>
 						</div>
 			</div></div>
-			
-			
-         </div>
 	<!-- Wrapper for media data-->
   <div id="restore_data" class="modal fade">
             <div class="modal-dialog" style="width: 40%">
