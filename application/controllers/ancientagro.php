@@ -262,7 +262,12 @@ $this->cart->destroy();
                        $data = $this->input->post();
                        $this->cart->update($data);
                }
+      
                $this->load->model('users') ;
+                $this->load->model('menus');
+                $data1['parents'] =$this->menus->get_parent_menus();
+                $data1['childs'] =$this->menus->get_child_menus();
+                $data1['active']='3';
                $data1['row']=  $this->users->shopping();
          $this->load->view('shopping',$data1);
        }

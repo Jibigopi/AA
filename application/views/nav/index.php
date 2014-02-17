@@ -247,6 +247,7 @@
                                                 <ul>  
                                                      <li>  <a href="<?php  echo base_url()?>index.php/menu">Menus</a></li>
                                                      <li>  <a href="<?php  echo base_url()?>index.php/cms/pages">Pages</a></li>
+                                                     <li>  <a href="<?php  echo base_url()?>index.php/product_details">Product Details</a></li>
                                                      
                                                      
 						</ul>

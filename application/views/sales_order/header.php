@@ -985,6 +985,10 @@ function add_new_item(){
                                                 <div class="col col-lg-2"><input type="hidden" name="price_list[]" id="p_price_'+$('#parsley_reg #product').val()+'" value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #'+$('#parsley_reg #product_type').val()+'_price').val()+'" ></div>\n\
                                                 <div class="col col-lg-2"><input type="hidden" name="total_list[]" id="p_total_'+$('#parsley_reg #product').val()+'" value="'+$('#parsley_reg #total_price').val()+'" ><input type="text" class="form-control" disabled value="'+$('#parsley_reg #total_price').val()+'" ></div>\n\
                                                <div class="col col-lg-1" ><div class="form-group"> <a href=javascript:edit_item_product("'+$('#parsley_reg #product').val()+'") ><i class="icon icon-pencil icon-2x"></i> </a>&nbsp;&nbsp; <a href=javascript:remove_item("id_'+$('#parsley_reg #stage_id').val()+'_'+$('#parsley_reg #product_type').val()+'_'+$('#parsley_reg #product').val()+'") ><i class="icon icon-trash icon-2x "></i> </a> </div> </div> </div> ')
+    
+    
+    
+    grand_totals();
     }
   }
 }

@@ -272,7 +272,7 @@
                                                                                                             'data-required'=>'true',
                                                                                                             'value'=>set_value('total'));
                                                                                                             echo form_input($total)?>          
-													 <input type="hidden" name="total_price" id="total_price">
+													 <input type="text" name="total_price" id="total_price">
 												</div>	
                                                                                         </div>
                                                                                      

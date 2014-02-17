@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Sales_order extends CI_Controller{
-     function __construct() { 
+        function __construct() { 
         parent::__construct();
          $this->load->helper(array('form', 'url'));
          $this->load->helper('form');
          session_start();       
     }
-     function index(){
+        function index(){
         if(isset($_SESSION['user']) && isset($_SESSION['user_type'])){
             if($_SESSION['user_type']=='admin'){
                 $this->load->view('sales_order/header');
@@ -21,7 +21,7 @@ class Sales_order extends CI_Controller{
                 redirect('admin');
          }  
     }
-    function data_table(){
+        function data_table(){
 		$aColumns = array( 'id','guid','number','receipient','cname','gname','address','address','no_of_unit','status', 'guid','guid' );	
 		$start = "";
 			$end="";
@@ -88,7 +88,6 @@ class Sales_order extends CI_Controller{
 		
 		   echo json_encode($output1);
    }
-    
 	function stock_grains($name){
 	if($name!=""){
 	 
@@ -190,17 +189,13 @@ class Sales_order extends CI_Controller{
                                                 'grand_total'=>  $this->input->post('grand_total')                                              
                                                     
                                                     );
-                                                
-                                                
 						 $this->load->model('sales_orders');
-                                                 
                                                  if($this->sales_orders->check($this->input->post('sales_order'))!=FALSE){
-                                                    echo "TRUE";
+                                                     echo "TRUE";
                                                      $this->sales_orders->add($data);
                                                  }else{                                                     
-                                                    echo "FALSE";
+                                                     echo "FALSE";
                                                  }
-                                                
                                         }else{
                                            echo "FALSE";
                                         }
@@ -228,7 +223,6 @@ class Sales_order extends CI_Controller{
 		  $data=$this->sales_orders->edit_sales_order($id);
 		  echo json_encode($data);
 	}
-        
         function customer() {
               $data=array();
               if($this->input->post('guid')){
@@ -257,9 +251,9 @@ class Sales_order extends CI_Controller{
         }
         function generate_order_number(){
             $this->load->model('sales_orders');
-        $data=  $this->sales_orders->generate_number();
-          $data='AA-SO-110'.$data;
-         echo json_encode($data);
+            $data=  $this->sales_orders->generate_number();
+            $data='AA-SO-110'.$data;
+            echo json_encode($data);
         }
 } 
 ?>

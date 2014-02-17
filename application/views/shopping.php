@@ -41,19 +41,7 @@
 
 	<!-- custom fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		
-        <script src="<?php echo base_url() ?>admin/data_table/js/jquery.min.js"></script>
-        <script src="<?php echo base_url() ?>admin/data_table/js/jquery.dataTables.min.js" type="text/javascript"></script>
-	<script type="text/javascript" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/DT_bootstrap.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>admin/js/typeahead.js"></script> 
-        
-        <script type="text/javascript" src="<?php echo base_url('upload_image/jquery.js') ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('upload_image/jquery.form.js') ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('admin/val/jquery.js')?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('admin/val/jquery.validate.js') ?>"></script>
-            <script type="text/javascript">
+	    <script type="text/javascript">
                  function get_stocks_detils(id,nid){
                      var now=$('#'+nid).val();
                      var no=$('#add_product #quty_'+id).val();
@@ -74,10 +62,20 @@
                 
                 }
             }
+            
+            
+            
             </script>
-            </script>
+       
                
         <style type="text/css">
+            .zoomWindow{
+                margin-top: -260%!important;
+                width: 600px !important;
+            }
+            .shopping_font{
+                font-family: verdana;
+            }
             #wrapper {
     position: relative;
 }
@@ -90,11 +88,15 @@
             
         </style> 
 <?php } ?>
+        	<script src="<?php echo base_url('website/hover/jquery-1.8.3.min.js')?>"></script>
+	<script src="<?php echo base_url('website/hover/jquery.elevatezoom.js')?>"></script>
+      
 </head>
 <body >
-    
+   
    <!-- Container-->
-   <div class=" container main_container " style="background-image: url(<?php echo base_url() ?>images/8bg.jpg); width: 100%; height: 100% "  >
+  
+   <div class=" container main_container " style="width: 100%;"  >
   
         <!-- Header-->
      
@@ -191,28 +193,37 @@
                  <h2 class="font text-center"><img src="<?php echo base_url() ?>images/divider_left_h.png" style="padding-right: 50px;"> SHOPPING <img src="<?php echo base_url() ?>images/divider_right_h.png" style="padding-left: 50px;"></h2>
              </div>
          </div>
-         <div class="row home_contant" style="margin-top:15px; ">
+   </div>
+         <div class="row home_contant shopping_font">
              
+			 <div class="col col-lg-1"></div>
 			 <div class="col col-lg-7">
                              <table class="table table-striped shopping_table" id="add_product" >
-                                 <thead><tr><td>Image</td><td  style="width: 130px">Grain Name</td><td style="width: 100px">Grain Code</td><td>Price</td><td  style="width: 100px">Quty</td><td>Add</td><td style="width: 80px">DETAILS</td></tr></thead>
+                                 <thead></thead><tr><th>Image</th><th  style="width: 130px">Product Name</th><th>Price</th><th  style="width: 100px">Quty</th><th>Add</th></tr>
                                 <tbody>
                          <?php $i=0; foreach ($row as $grain) { ++$i; ?>
                                   
-                                    <tr> <?php echo form_open('ancientagro/shopping'); ?>  
-                                        <td><input type="hidden" id='image_<?php echo $grain->guid ?>' value="<?php echo $grain->name ?>"> <a data-toggle="modal" href="#restore_data" onclick='get_image_for_selected_product("<?php echo $grain->image;?>","<?php echo $grain->guid;?>")' ><img src="<?php echo base_url().'/uploads/'.$grain->image ?>" style="width: 50px;height: 50px;"></a></td>
+                                    <tr style="background: none !important"> <?php echo form_open('ancientagro/shopping'); ?>  
+                                        <td style="background: none !important;width: 221px">
+                                            <img id="image_oo<?php echo $i; ?>"  src='<?php echo base_url('uploads');echo '/'.$grain->image; ?>' data-zoom-image="<?php echo base_url('uploads');echo '/'.$grain->image; ?>" style="width: 100px;height: 50px;border:solid 2px #a75327"/>
+                                        	   <script>
+ 
+   $("#image_oo<?php echo $i; ?>").elevateZoom({scrollZoom : true});
+     
+</script><a href="<?php echo base_url('index.php/ancientagro/product_details/').'/'.$grain->inventory_id ?>"class="btn btn-default btn-sm pull-right shopping_input agro_button">View More</a>  <input type="hidden" id="<?php echo $grain->inventory_id; ?>" name="stock_product" value="<?php echo $grain->unit;?> ">
+                                        </td>
                                         
-                                        <td><br><?php echo $grain->name; ?></td><td><br><?php echo $grain->gcode; ?></td><td><br><?php echo $grain->unit_price; ?></td>
-                                                                        <td><?php $quty=array(
+                                        <td style="background: none !important" ><br><?php echo $grain->name; ?></td><td style="background: none !important"><br><?php echo $grain->unit_price; ?></td>
+                                                                        <td style="background: none !important"> <?php $quty=array(
                                                                             'name'=>'qty',
                                                                             'id'=>"quty_$grain->inventory_id",
-                                                                            'class'=>'form-control shopping_quty shopping_input',
+                                                                            'class'=>'form-control shopping_quty shopping_input ',
                                                                             'onkeyup'=>"get_stocks_detils('".$grain->inventory_id."','".md5($i)."')",
                                                                             'value'=>1
                                                                             
                                                                             );
                                                                             echo form_input($quty)?> </td>
-                                                                        <td>
+                                                                        <td style="background: none !important">
                                                                             <input type="hidden" name="id" id="<?php echo 'p_'.$grain->inventory_id ?>" value="<?php echo md5($grain->inventory_id) ?>" />
                                                                             <input type="hidden" name="id" value="<?php echo $grain->id ?>" />
                                                                             <input type="hidden" name="name" value="<?php echo $grain->name ?>" />
@@ -220,11 +231,10 @@
                                                                             
                                                                             
                                                                             <?php $add=array('name'=>'add_cart',
-                                                                            'class'=>'btn shopping_input',
+                                                                            'class'=>'btn shopping_input agro_button',
                                                                             'value'=>'Add');
                                                                             echo form_submit($add)?>                                                         
                                                                             
-                                                                        </td><td><a href="<?php echo base_url('index.php/ancientagro/product_details/').'/'.$grain->inventory_id ?>"class="btn btn-default btn-sm pull-right shopping_input">View More</a>  <input type="hidden" id="<?php echo $grain->inventory_id; ?>" name="stock_product" value="<?php echo $grain->unit;?> ">
                                                                         </td>
                               
                                                   <?php echo form_close(); } ?> 
@@ -237,10 +247,16 @@
          
 			</div>
 			
+			   <script>
+ 
+   $("#image_oo1").elevateZoom({scrollZoom : true});
+   $("#image_oo2").elevateZoom({scrollZoom : true});
+   $("#image_oo3").elevateZoom({scrollZoom : true});
+     
+</script>
 			
 			
-			
-         </div><div class="col col-lg-5" style="margin-left: 707px;margin-top: -173px">
+                         <div class="col col-lg-3" style="width: 28% !important">
 					<?php echo form_open('ancientagro/udpate_cart'); ?>
 
                             <table class="table table-striped " id="selected_product"  style="width:100%" border="0">
@@ -291,9 +307,9 @@
 						  <td class="right">$<?php echo $this->cart->format_number($this->cart->total()); ?></td>
 						</tr>
 
-						</table>
+						</table><br>
                             <div class="row"><div class="col col-lg-4">
-                                    <?php $update_cart=array('name'=>'update_cart','value'=>'Update your Cart','class'=>'btn') ?>
+                                    <?php $update_cart=array('name'=>'update_cart','value'=>'Update your Cart','class'=>'btn agro_button') ?>
 						<?php echo form_submit($update_cart); ?>
 						<?php echo form_close(); ?>
                                     </div>
@@ -302,10 +318,11 @@
                                                     <?php 
                                                     $check_out=array('name'=>'checkout',
                                                         'value'=>'Checkout',
-                                                        'class'=>'btn');
+                                                        'class'=>'btn agro_button');
                                                     echo form_submit($check_out); ?><?php echo form_close(); ?>
 						</div>
-			</div></div>
+			</div></div></div>
+    <div class=" container main_container " >
 	<!-- Wrapper for media data-->
   <div id="restore_data" class="modal fade">
             <div class="modal-dialog" style="width: 40%">
@@ -344,7 +361,7 @@
 							</div>
 						</div>
 		 
-         <div class="fotter fancy_font" style="margin-top: 30px;height: 160px;background:url(<?php echo base_url() ?>images/Footer_Img.png) ;color: #ffffff; ">
+         <div class="fotter fancy_font" style="margin-top: 130px;height: 160px;background:url(<?php echo base_url() ?>images/Footer_Img.png) ;color: #ffffff; ">
              <div class="row">
              <p style="margin-top: 130px">&nbsp;&nbsp;&nbsp;&nbsp; Copyright © 2013 Ancient Agro. All rights reserved.</p>
              </div>
@@ -357,40 +374,5 @@
 
 
 
-   <script src="<?php echo base_url() ?>admin/bootstrap/js/bootstrap.min.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/jquery.ba-resize.min.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/jquery_cookie.min.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/retina.min.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/lib/typeahead.js/typeahead.min.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/lib/typeahead.js/hogan-2.0.0.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/tinynav.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/jquery.sticky.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/lib/jMenu/js/jMenu.jquery.js"></script>
-		<script src="<?php echo base_url() ?>admin/js/ebro_common.js"></script>
-                <script src="<?php echo base_url() ?>admin/js/lib/datepicker/js/bootstrap-datepicker.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/jquery_ui/jquery-ui-1.10.3.custom.min.js"></script>
-                        <script src="<?php echo base_url() ?>admin/js/pages/ebro_dashboard2.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/media/js/jquery.dataTables.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/extras/ColReorder/media/js/ColReorder.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/extras/FixedColumns/media/js/FixedColumns.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/extras/ColVis/media/js/ColVis.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/extras/TableTools/media/js/TableTools.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/extras/TableTools/media/js/ZeroClipboard.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/dataTables/media/DT_bootstrap.js"></script>
-			<script src="<?php echo base_url() ?>admin/data_table/js/bootstrap-alert.js"></script>
-                        <script src="<?php echo base_url() ?>admin/data_table/js/jquery.bootstrap-growl.js"></script>
-                        <script src="<?php echo base_url() ?>admin/data_table/bootbox.min.js"></script>
-			<script src="<?php echo base_url() ?>admin/js/lib/parsley/parsley.min.js"></script>			
-			<script src="<?php echo base_url() ?>admin/js/pages/ebro_form_validate.js"></script>
-		<!--[if lte IE 9]>
-		<script src="<?php echo base_url() ?>admin/js/ie/jquery.placeholder.js"></script>
-		<script>
-			$(function() {
-				$('input, textarea').placeholder();
-			});
-		</script>
-	<![endif]-->
-        <!-- Bootstrap js-->
-   <!-- Body-->
 </body>
 </html>
