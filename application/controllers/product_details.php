@@ -246,5 +246,18 @@ class Product_details Extends CI_Controller
             return 'TRUE';
                     
         }
+        function add_product_over_view(){
+            $over=  $this->input->post('over_text');
+            $product=  $this->input->post('product_id');
+            $this->load->model('products_details');
+            $this->products_details->add_product_over_view($product,$over);
+            echo 'TRUE';       
+        }
+        function get_product_meta($guid){
+            $this->load->model('products_details');
+            $data=  $this->products_details->get_product_meta($guid);
+            echo json_encode($data);
+                    
+        }
 }
 ?>

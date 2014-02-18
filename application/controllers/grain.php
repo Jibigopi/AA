@@ -152,9 +152,9 @@ class Grain Extends CI_Controller
  function add_new_nutrition(){
         $config['upload_path'] = './uploads/nutrition';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '30000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '5768';
+		$config['max_size']	= '300000';
+		$config['max_width']  = '12024';
+		$config['max_height']  = '12768';
 
 		$this->load->library('upload', $config);
 

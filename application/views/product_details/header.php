@@ -49,7 +49,10 @@
         <script type="text/javascript" src="<?php echo base_url('admin/val/jquery.validate.js') ?>"></script>
         <script>
 	$(document).ready(function() {
-       
+        over_view_form.onsubmit=function()
+            { 
+              return false;
+            } 
            $('#dt_table_tools').dataTable({
                                       "bProcessing": true,
 				      "bServerSide": true,
@@ -80,7 +83,7 @@
                                                                  return '<div class="btn-group"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon icon-cog"></i>  <span class="caret"></span>   </button>   <ul class="dropdown-menu" >  \n\
                                                                    <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Product Images</a></li> \n\
                                                                    <li ><a data-toggle="modal"  href="#set_nutrition" onclick=set_nutrition("'+oObj.aData[0]+'");>Set Nutrition</a></li> \n\
-                                                                   <li ><a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'"); >Set Product Image</a></li> \n\
+                                                                   <li ><a data-toggle="modal" href="#over_view" onclick=over_view("'+oObj.aData[0]+'"); >Over View</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#update_product"  onclick=update_product("'+oObj.aData[0]+'");  >  Edit</a></li> \n\
                                                                    <li ><a href=javascript:user_function("'+oObj.aData[0]+'"); >  Delete</a></li> \n\
                                                                     </ul>  </div>';
@@ -89,7 +92,26 @@
  						]
 		}                  
                  );
-                 
+                   $("#save_over_view").click(function() {
+                            var inputs = $('#over_view_form').serialize();
+				 
+				  $.ajax ({
+					url: "<?php echo base_url('index.php/product_details/add_product_over_view')?>",
+					data: inputs,
+                                        type:'POST',
+					complete: function(response) {                                    
+                                        if(response['responseText']=='TRUE'){
+                                                    bootbox.alert('Product Over View Saved');   
+                                                  $("#dt_table_tools").dataTable().fnDraw();
+                                                      document.getElementById('over_view_close').click(); 
+                                                     
+                                                      $("#over_view_form").trigger('reset');
+                                        }   
+                                         
+                                        
+					}
+				  });
+				}); 
                
 		});
                 function user_function(guid){
@@ -116,7 +138,39 @@
                 }
                 
                    
-           
+            function set_nutrition(guid){
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/grain/edit_grain/"+guid,                      
+			  data: "",     						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                             
+                                 $('#set_nutrition #nutrition_product_name').val(data[0]['gcode']);
+                                 
+                                         $('#set_nutrition #nutrition_product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
+            function over_view(guid){
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta/"+guid,                      
+			  data: "",     						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                             
+                                 $('#over_view #product_name').val(data[0]['gcode']);
+                                 $('#over_view #over_text').val(data[0]['value']);
+                                 
+                                         $('#over_view #product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
 
 	</script>	
 	</head>
