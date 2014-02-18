@@ -84,7 +84,7 @@
 				<div class="modal-content">
                                          <div class="modal-header">
 						<button type="button" id="over_view_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                 <h4 class="modal-title" id="myModalLabel">Nutrition Image</h4>
+                                                 <h4 class="modal-title" id="myModalLabel">Product Over View</h4>
 					</div>
                                         <form id="over_view_form" action="" method="post" >
                                          <div class="row" >
@@ -102,6 +102,68 @@
                                                 <div class="col col-lg-1"></div>
                                                 <div class="col col-lg-10">
                                                     <textarea name="over_text" id='over_text' rows="6" class="form-control" ></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                       <br>
+                       <br><br>      
+                        </div>
+                             </div>
+                  </div>
+                        <div id="source" class="modal fade">
+                           <div class="modal-dialog" >
+				<div class="modal-content">
+                                         <div class="modal-header">
+						<button type="button" id="source_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                 <h4 class="modal-title" id="myModalLabel">Product Source</h4>
+					</div>
+                                        <form id="source_form" action="" method="post" >
+                                         <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                 <div class="col col-lg-4"> <br>
+                                                 <input id="product_name" disabled="disabled" class="text-center form-control"  ></div>
+                                                <input type="hidden" name="product_id" id="product_id" >
+                                                 <div class="col col-lg-4"> <br>
+                                                    
+                                                 </div>
+                                                 <div class="col col-lg-2"><br>
+                                                 <input type="submit" id='save_source' class="form-control btn btn-success" value="Save"></div>
+                                          </div><br>
+                                            <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                <div class="col col-lg-10">
+                                                    <textarea name="source_text" id='source_text' rows="6" class="form-control" ></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                       <br>
+                       <br><br>      
+                        </div>
+                             </div>
+                  </div>
+                        <div id="benefits" class="modal fade">
+                           <div class="modal-dialog" >
+				<div class="modal-content">
+                                         <div class="modal-header">
+						<button type="button" id="benefits_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                 <h4 class="modal-title" id="myModalLabel">Product Source</h4>
+					</div>
+                                        <form id="benefits_form" action="" method="post" >
+                                         <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                 <div class="col col-lg-4"> <br>
+                                                 <input id="product_name" disabled="disabled" class="text-center form-control"  ></div>
+                                                <input type="hidden" name="product_id" id="product_id" >
+                                                 <div class="col col-lg-4"> <br>
+                                                    
+                                                 </div>
+                                                 <div class="col col-lg-2"><br>
+                                                 <input type="submit" id='save_benefits' class="form-control btn btn-success" value="Save"></div>
+                                          </div><br>
+                                            <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                <div class="col col-lg-10">
+                                                    <textarea name="benefits_text" id='benefits_text' rows="6" class="form-control" ></textarea>
                                                 </div>
                                             </div>
                                         </form>

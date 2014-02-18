@@ -257,21 +257,51 @@ class Products_details extends CI_model{
       
     }
     function add_product_over_view($product,$over){
-        $this->db->select()->from('product_meta')->where('product_id',$product)->where('key','over view');
+        $this->db->select()->from('product_meta')->where('product_id',$product)->where('key','over_view');
         $sql=  $this->db->get();
         if($sql->num_rows()>0){
-            $this->db->where('product_id',$product)->where('key','over view');
+            $this->db->where('product_id',$product)->where('key','over_view');
             $this->db->update('product_meta',array('value'=>$over));
         }else{
-            $this->db->insert('product_meta',array('key'=>'over view','value'=>$over,'product_id'=>$product));
+            $this->db->insert('product_meta',array('key'=>'over_view','value'=>$over,'product_id'=>$product));
                     
         }
     }
-    function get_product_meta($guid){
-        $this->db->select('product_meta.*,grains.name,grains.gcode')->from('product_meta')->where('product_id',$guid)->where('key','over view');
+    function add_product_source($product,$over){
+        $this->db->select()->from('product_meta')->where('product_id',$product)->where('key','source');
+        $sql=  $this->db->get();
+        if($sql->num_rows()>0){
+            $this->db->where('product_id',$product)->where('key','source');
+            $this->db->update('product_meta',array('value'=>$over));
+        }else{
+            $this->db->insert('product_meta',array('key'=>'source','value'=>$over,'product_id'=>$product));
+                    
+        }
+    }
+    function add_product_benefits($product,$over){
+        $this->db->select()->from('product_meta')->where('product_id',$product)->where('key','benefits');
+        $sql=  $this->db->get();
+        if($sql->num_rows()>0){
+            $this->db->where('product_id',$product)->where('key','benefits');
+            $this->db->update('product_meta',array('value'=>$over));
+        }else{
+            $this->db->insert('product_meta',array('key'=>'benefits','value'=>$over,'product_id'=>$product));
+                    
+        }
+    }
+    function get_product_meta($guid,$key){
+        $this->db->select('product_meta.*,grains.name,grains.gcode')->from('product_meta')->where('product_meta.product_id',$guid)->where('product_meta.key',$key);
         $this->db->join('grains','grains.guid=product_meta.product_id','left' );
         $sql=$this->db->get();
-        return $sql->result();
-    }
+        if($sql->num_rows()>0){
+          return $sql->result();
+        }else{
+            $this->db->select()->from('grains')->where('guid',$guid);
+            $pro=$this->db->get();
+            return $pro->result();     
+                    
+        }
+        }
+    
 }
 ?>

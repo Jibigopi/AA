@@ -53,6 +53,14 @@
             { 
               return false;
             } 
+        source_form.onsubmit=function()
+            { 
+              return false;
+            } 
+        benefits_form.onsubmit=function()
+            { 
+              return false;
+            } 
            $('#dt_table_tools').dataTable({
                                       "bProcessing": true,
 				      "bServerSide": true,
@@ -84,7 +92,8 @@
                                                                    <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Product Images</a></li> \n\
                                                                    <li ><a data-toggle="modal"  href="#set_nutrition" onclick=set_nutrition("'+oObj.aData[0]+'");>Set Nutrition</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#over_view" onclick=over_view("'+oObj.aData[0]+'"); >Over View</a></li> \n\
-                                                                   <li ><a data-toggle="modal" href="#update_product"  onclick=update_product("'+oObj.aData[0]+'");  >  Edit</a></li> \n\
+                                                                   <li ><a data-toggle="modal" href="#source"  onclick=source("'+oObj.aData[0]+'");  >  source</a></li> \n\
+                                                                   <li ><a data-toggle="modal" href="#benefits"  onclick=benefits("'+oObj.aData[0]+'");  >  Benefits</a></li> \n\
                                                                    <li ><a href=javascript:user_function("'+oObj.aData[0]+'"); >  Delete</a></li> \n\
                                                                     </ul>  </div>';
                                                                 },
@@ -106,6 +115,46 @@
                                                       document.getElementById('over_view_close').click(); 
                                                      
                                                       $("#over_view_form").trigger('reset');
+                                        }   
+                                         
+                                        
+					}
+				  });
+				}); 
+                   $("#save_source").click(function() {
+                            var inputs = $('#source_form').serialize();
+				 
+				  $.ajax ({
+					url: "<?php echo base_url('index.php/product_details/add_product_source')?>",
+					data: inputs,
+                                        type:'POST',
+					complete: function(response) {                                    
+                                        if(response['responseText']=='TRUE'){
+                                                    bootbox.alert('Product source Saved');   
+                                                  $("#dt_table_tools").dataTable().fnDraw();
+                                                      document.getElementById('source_close').click(); 
+                                                     
+                                                      $("#source_form").trigger('reset');
+                                        }   
+                                         
+                                        
+					}
+				  });
+				}); 
+                   $("#save_benefits").click(function() {
+                            var inputs = $('#benefits_form').serialize();
+				 
+				  $.ajax ({
+					url: "<?php echo base_url('index.php/product_details/add_product_benefits')?>",
+					data: inputs,
+                                        type:'POST',
+					complete: function(response) {                                    
+                                        if(response['responseText']=='TRUE'){
+                                                    bootbox.alert('Product Benefits Saved');   
+                                                  $("#dt_table_tools").dataTable().fnDraw();
+                                                      document.getElementById('benefits_close').click(); 
+                                                     
+                                                      $("#source_form").trigger('reset');
                                         }   
                                          
                                         
@@ -155,9 +204,15 @@
 			});
                     }
             function over_view(guid){
+             $("#over_view_form").trigger('reset');
+            var value='over_view';
                         $.ajax({                                      
-			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta/"+guid,                      
-			  data: "",     						 
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta",                     
+			 type: "POST",
+                            data: {
+                                guid:guid,
+                              key:value
+                          }     ,						 
 			  dataType: 'json',               
 			  success: function(data)     
 			  {
@@ -166,6 +221,50 @@
                                  $('#over_view #over_text').val(data[0]['value']);
                                  
                                          $('#over_view #product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
+            function source(guid){
+              $("#source_form").trigger('reset');
+                        var value='source';
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta",                     
+			 type: "POST",
+                            data: {
+                                guid:guid,
+                              key:value
+                          }     ,						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                                 $('#source #product_name').val(data[0]['gcode']);
+                                 $('#source #source_text').val(data[0]['value']);
+                                 
+                                         $('#source #product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
+            function benefits(guid){
+              $("#benefits_form").trigger('reset');
+                        var value='benefits';
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta",                     
+			 type: "POST",
+                            data: {
+                                guid:guid,
+                              key:value
+                          }     ,						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                                 $('#benefits #product_name').val(data[0]['gcode']);
+                                 $('#benefits #benefits_text').val(data[0]['value']);
+                                 
+                                         $('#benefits #product_id').val(guid);
                                
                              
                           }

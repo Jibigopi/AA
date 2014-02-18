@@ -253,9 +253,26 @@ class Product_details Extends CI_Controller
             $this->products_details->add_product_over_view($product,$over);
             echo 'TRUE';       
         }
-        function get_product_meta($guid){
+        function add_product_source(){
+            $over=  $this->input->post('source_text');
+            $product=  $this->input->post('product_id');
             $this->load->model('products_details');
-            $data=  $this->products_details->get_product_meta($guid);
+            $this->products_details->add_product_source($product,$over);
+            echo 'TRUE';       
+        }
+        function add_product_benefits(){
+            $over=  $this->input->post('benefits_text');
+            $product=  $this->input->post('product_id');
+            $this->load->model('products_details');
+            $this->products_details->add_product_benefits($product,$over);
+            echo 'TRUE';       
+        }
+        function get_product_meta(){
+          $guid=  $this->input->post('guid');
+           $key=$this->input->post('key');
+                    
+            $this->load->model('products_details');
+            $data=  $this->products_details->get_product_meta($guid,$key);
             echo json_encode($data);
                     
         }
