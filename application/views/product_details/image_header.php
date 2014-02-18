@@ -38,58 +38,22 @@
 	<!-- custom fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 		
-
-       
+        <script src="<?php echo base_url() ?>admin/data_table/js/jquery.min.js"></script>
+        <script src="<?php echo base_url() ?>admin/data_table/js/jquery.dataTables.min.js" type="text/javascript"></script>
 	<script type="text/javascript" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/jquery.js"></script>
 	<script type="text/javascript" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/jquery.dataTables.js"></script>
         <script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo base_url() ?>admin/data_table/js/DT_bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>admin/js/typeahead.js"></script> 
         
+        <script type="text/javascript" src="<?php echo base_url('upload_image/jquery.js') ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('upload_image/jquery.form.js') ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('admin/val/jquery.js')?>"></script>
         <script type="text/javascript" src="<?php echo base_url('admin/val/jquery.validate.js') ?>"></script>
         <script>
 	$(document).ready(function() {
        
-           $('#dt_table_tools').dataTable({
-                                      "bProcessing": true,
-				      "bServerSide": true,
-                                      "sAjaxSource": "<?php echo base_url() ?>index.php/dashboard/grains_data_table",
-                                       aoColumns: [  
-                                    
-                                 { "bVisible": false} , {	"sName": "ID",
-                   						"bSearchable": false,
-                   						"bSortable": false,                                                                
-                   						"fnRender": function (oObj) {
-                   							return "<input type=checkbox value='"+oObj.aData[0]+"' >";
-								},
-								
-								
-							},
-        
-        null, null, null, 
-
- 							
- 						,
- 							{	"sName": "ID1",
-                   						"bSearchable": false,
-                   						"bSortable": false,
-                                                                
-                   						"fnRender": function(oObj) {
-                                                                
-                                                                   //     return '<a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'");  ><span data-toggle="tooltip" class="label label-warning hint--top hint--error" data-hint="EDIT"><i class="icon-film"></i> </span> </a> &nbsp <a data-toggle="modal" href="#update_product"  onclick=update_product("'+oObj.aData[0]+'"); ><span data-toggle="tooltip" class="label label-success hint--top hint--error" data-hint="EDIT"><i class="icon-edit"></i></span> </a>'+"&nbsp;<a href=javascript:user_function('"+oObj.aData[0]+"'); ><span data-toggle='tooltip' class='label label-danger hint--top hint--error' data-hint='DELETE'><i class='icon-trash'></i></span> </a>";
-                                                                 return '<div class="btn-group"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon icon-cog"></i>  <span class="caret"></span>   </button>   <ul class="dropdown-menu" >  \n\
-                                                                   <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Product Images</a></li> \n\
-                                                                   <li ><a data-toggle="modal"  href="#set_nutrition" onclick=set_nutrition("'+oObj.aData[0]+'");>Set Nutrition</a></li> \n\
-                                                                   <li ><a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'"); >Set Product Image</a></li> \n\
-                                                                   <li ><a data-toggle="modal" href="#update_product"  onclick=update_product("'+oObj.aData[0]+'");  >  Edit</a></li> \n\
-                                                                   <li ><a href=javascript:user_function("'+oObj.aData[0]+'"); >  Delete</a></li> \n\
-                                                                    </ul>  </div>';
-                                                                },
-							},
- 						]
-		}                  
-                 );
                  
+                   
                
 		});
                 function user_function(guid){

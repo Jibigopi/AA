@@ -11,6 +11,32 @@ class Products_details extends CI_model{
          $query=$this->db->get();
          return $query->result_array();
     }
+    function products_meta_table($end,$start,$order,$like,$guid){
+         $this->db->select()->from('product_meta')->where('product_id',$guid);  
+         $this->db->limit($end,$start); 
+         $this->db->order_by($order);
+         $this->db->or_like($like);     
+         $query=$this->db->get();
+         return $query->result_array();
+    }
+     function count_meta($guid){
+        $this->db->select()->from('product_meta')->where('id',$guid);
+        $sql=  $this->db->get();
+        return $sql->num_rows();
+    }
+    function max_id($guid){
+        $this->db->select();
+        $this->db->where('product_id',$guid);
+        $this->db->order_by('id', 'DESC'); 
+        $this->db->limit(1);
+        $sql= $this->db->get('product_meta');
+        $id;
+        foreach ($sql->result() as $row){
+            $id=$row->id;
+        }
+        return $id;
+    }
+   
     function get_grains_details($name){
         $this->db->select()->from('grains')->where('name',$name);
         $sql=  $this->db->get();
@@ -81,6 +107,7 @@ class Products_details extends CI_model{
     function count_grain(){
             return $this->db->count_all('grains');
     }
+   
     function get_grain($guid){
         $this->db->select()->from('grains')->where('id',$guid);
         $sql=  $this->db->get();
@@ -95,21 +122,17 @@ class Products_details extends CI_model{
             return TRUE;
         }
     }
-    function edit_grain($guid){
+    function get_product($guid){
         $this->db->select()->from('grains')->where('guid',$guid);
         $sql=  $this->db->get();
-        $data=array();
-        foreach ($sql->result() as $row){
-            $data[]=$row;
-        }
-        $this->db->select()->from('nutrition')->where('product_id',$guid);
-        $num=  $this->db->get();
-        foreach ($num->result() as $row){
-        $data[]=$row;
-        }
-          
-        return $data;
+        return $sql->result();
     }
+    function get_product_images($guid){
+        $this->db->select()->from('product_meta')->where('key','image')->where('product_id',$guid);
+        $sql=  $this->db->get();
+        return $sql->result();
+    }
+            
     function get_sales_channel($guid){
         $this->db->select()->from('grains')->where('guid',$guid);
         $sql=  $this->db->get();
@@ -196,7 +219,7 @@ class Products_details extends CI_model{
     }
     function add_image($guid,$file_name){
         $this->db->where('guid',$guid);
-        $this->db->update('grains',array('image'=>$file_name));
+        $this->db->insert('product_meta',array('product_id'=>$guid,'key'=>'image','url'=>'/uploads/product_images/','value'=>$file_name));
     }
     function nutrition_image($guid,$file_name){
         $this->db->where('guid',$guid);
@@ -226,6 +249,12 @@ class Products_details extends CI_model{
     }
     function add_sales_channel($guid,$channel){
         $this->db->insert('grains_x_sales_channel',array('channel_id'=>$channel,'product_id'=>$guid));
+    }
+    function remove_image($guid){
+        $this->db->where('id',$guid);
+        
+        $this->db->delete('product_meta');
+      
     }
 }
 ?>

@@ -134,7 +134,7 @@ class Grain Extends CI_Controller
 		$config['max_size']	= '22100';
 		$config['max_width']  = '11024';
 		$config['max_height']  = '3768';
-
+  
 		$this->load->library('upload', $config);
 
 		if ( ! $this->upload->do_upload())
