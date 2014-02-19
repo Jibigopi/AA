@@ -65,6 +65,10 @@
             { 
               return false;
             } 
+        description_form.onsubmit=function()
+            { 
+              return false;
+            } 
            $('#dt_table_tools').dataTable({
                                       "bProcessing": true,
 				      "bServerSide": true,
@@ -99,6 +103,7 @@
                                                                    <li ><a data-toggle="modal" href="#source"  onclick=source("'+oObj.aData[0]+'");  >  source</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#benefits"  onclick=benefits("'+oObj.aData[0]+'");  >  Benefits</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#culinary"  onclick=culinary("'+oObj.aData[0]+'");  >  culinary</a></li> \n\
+                                                                   <li ><a data-toggle="modal" href="#description"  onclick=description("'+oObj.aData[0]+'");  >  Description</a></li> \n\
                                                                     </ul>  </div>';
                                                                 },
 							},
@@ -179,6 +184,26 @@
                                                       document.getElementById('culinary_close').click(); 
                                                      
                                                       $("#culinary_form").trigger('reset');
+                                        }   
+                                         
+                                        
+					}
+				  });
+				}); 
+                   $("#save_description").click(function() {
+                            var inputs = $('#description_form').serialize();
+				 
+				  $.ajax ({
+					url: "<?php echo base_url('index.php/product_details/add_product_description')?>",
+					data: inputs,
+                                        type:'POST',
+					complete: function(response) {                                    
+                                        if(response['responseText']=='TRUE'){
+                                                    bootbox.alert('Product Description Saved');   
+                                                  $("#dt_table_tools").dataTable().fnDraw();
+                                                      document.getElementById('description_close').click(); 
+                                                     
+                                                      $("#description_form").trigger('reset');
                                         }   
                                          
                                         
@@ -311,6 +336,27 @@
                                  $('#culinary #culinary_text').val(data[0]['value']);
                                  
                                          $('#culinary #product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
+            function description(guid){
+              $("#description_form").trigger('reset');
+                        var value='description';
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta",                     
+			 type: "POST",
+                            data: {
+                                guid:guid,
+                              key:value
+                          }     ,						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                                 $('#description #product_name').val(data[0]['gcode']);
+                                 $('#description #description_text').val(data[0]['value']);
+                                 $('#description #product_id').val(guid);
                                
                              
                           }
