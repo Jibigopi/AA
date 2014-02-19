@@ -172,6 +172,37 @@
                         </div>
                              </div>
                   </div>
+                        <div id="culinary" class="modal fade">
+                           <div class="modal-dialog" >
+				<div class="modal-content">
+                                         <div class="modal-header">
+						<button type="button" id="culinary_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                 <h4 class="modal-title" id="myModalLabel">Product Culinary</h4>
+					</div>
+                                        <form id="culinary_form" action="" method="post" >
+                                         <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                 <div class="col col-lg-4"> <br>
+                                                 <input id="product_name" disabled="disabled" class="text-center form-control"  ></div>
+                                                <input type="hidden" name="product_id" id="product_id" >
+                                                 <div class="col col-lg-4"> <br>
+                                                    
+                                                 </div>
+                                                 <div class="col col-lg-2"><br>
+                                                 <input type="submit" id='save_culinary' class="form-control btn btn-success" value="Save"></div>
+                                          </div><br>
+                                            <div class="row" >
+                                                <div class="col col-lg-1"></div>
+                                                <div class="col col-lg-10">
+                                                    <textarea name="culinary_text" id='culinary_text' rows="6" class="form-control" ></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                       <br>
+                       <br><br>      
+                        </div>
+                             </div>
+                  </div>
 			<div id="footer_space"></div>
 		</div>
 

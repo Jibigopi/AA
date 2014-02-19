@@ -267,6 +267,13 @@ class Product_details Extends CI_Controller
             $this->products_details->add_product_benefits($product,$over);
             echo 'TRUE';       
         }
+        function add_product_culinary(){
+            $over=  $this->input->post('culinary_text');
+            $product=  $this->input->post('product_id');
+            $this->load->model('products_details');
+            $this->products_details->add_product_culinary($product,$over);
+            echo 'TRUE';       
+        }
         function get_product_meta(){
           $guid=  $this->input->post('guid');
            $key=$this->input->post('key');

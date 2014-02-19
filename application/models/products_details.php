@@ -289,6 +289,17 @@ class Products_details extends CI_model{
                     
         }
     }
+    function add_product_culinary($product,$over){
+        $this->db->select()->from('product_meta')->where('product_id',$product)->where('key','culinary');
+        $sql=  $this->db->get();
+        if($sql->num_rows()>0){
+            $this->db->where('product_id',$product)->where('key','culinary');
+            $this->db->update('product_meta',array('value'=>$over));
+        }else{
+            $this->db->insert('product_meta',array('key'=>'culinary','value'=>$over,'product_id'=>$product));
+                    
+        }
+    }
     function get_product_meta($guid,$key){
         $this->db->select('product_meta.*,grains.name,grains.gcode')->from('product_meta')->where('product_meta.product_id',$guid)->where('product_meta.key',$key);
         $this->db->join('grains','grains.guid=product_meta.product_id','left' );

@@ -61,6 +61,10 @@
             { 
               return false;
             } 
+        culinary_form.onsubmit=function()
+            { 
+              return false;
+            } 
            $('#dt_table_tools').dataTable({
                                       "bProcessing": true,
 				      "bServerSide": true,
@@ -94,7 +98,7 @@
                                                                    <li ><a data-toggle="modal" href="#over_view" onclick=over_view("'+oObj.aData[0]+'"); >Over View</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#source"  onclick=source("'+oObj.aData[0]+'");  >  source</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#benefits"  onclick=benefits("'+oObj.aData[0]+'");  >  Benefits</a></li> \n\
-                                                                   <li ><a href=javascript:user_function("'+oObj.aData[0]+'"); >  Delete</a></li> \n\
+                                                                   <li ><a data-toggle="modal" href="#culinary"  onclick=culinary("'+oObj.aData[0]+'");  >  culinary</a></li> \n\
                                                                     </ul>  </div>';
                                                                 },
 							},
@@ -155,6 +159,26 @@
                                                       document.getElementById('benefits_close').click(); 
                                                      
                                                       $("#source_form").trigger('reset');
+                                        }   
+                                         
+                                        
+					}
+				  });
+				}); 
+                   $("#save_culinary").click(function() {
+                            var inputs = $('#culinary_form').serialize();
+				 
+				  $.ajax ({
+					url: "<?php echo base_url('index.php/product_details/add_product_culinary')?>",
+					data: inputs,
+                                        type:'POST',
+					complete: function(response) {                                    
+                                        if(response['responseText']=='TRUE'){
+                                                    bootbox.alert('Product Culinary Saved');   
+                                                  $("#dt_table_tools").dataTable().fnDraw();
+                                                      document.getElementById('culinary_close').click(); 
+                                                     
+                                                      $("#culinary_form").trigger('reset');
                                         }   
                                          
                                         
@@ -265,6 +289,28 @@
                                  $('#benefits #benefits_text').val(data[0]['value']);
                                  
                                          $('#benefits #product_id').val(guid);
+                               
+                             
+                          }
+			});
+                    }
+            function culinary(guid){
+              $("#culinary_form").trigger('reset');
+                        var value='culinary';
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/product_details/get_product_meta",                     
+			 type: "POST",
+                            data: {
+                                guid:guid,
+                              key:value
+                          }     ,						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                                 $('#culinary #product_name').val(data[0]['gcode']);
+                                 $('#culinary #culinary_text').val(data[0]['value']);
+                                 
+                                         $('#culinary #product_id').val(guid);
                                
                              
                           }
