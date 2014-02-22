@@ -33,6 +33,12 @@ color: #ffffff;
 font-weight: 600 !important;
 background-repeat:no-repeat  !important;
 }
+.agro_topic{
+ background:url("button.png") !important;
+background-size:100% !important;
+color: #ffffff;
+background-repeat:no-repeat  !important;
+}
 nav{
     font-family: DesdemonaBlack;
     font-size: 23px;
@@ -100,7 +106,8 @@ header{
     width: 60px;
 }
 .home_contant .active{
-    background: #ffffff !important;
+    background: none repeat scroll 0 0 #FFFFFF !important;
+     border-top: 2px solid #B8682B !important;
 }
 .tab{
     color: #000!important;
@@ -111,11 +118,20 @@ header{
     font-family: DesdemonaBlack;
 }
 .tab-content p{
-    padding: 25px 0px;
+padding: 25px ;
     color: #000 !important;
     text-justify: auto !important;
     font-family: verdana;
     font-size: 15px;
+     margin: 23px auto;
     text-align: justify;
     line-height: 20px;
+}
+.home_contant .nav li:hover{
+     background: none repeat scroll 0 0 #FFFFFF !important;
+     border-top: 2px solid #B8682B !important; 
+}
+.home_contant .nav li a{
+      line-height: 0.629 !important; 
+       margin-right: 0 !important; 
 }

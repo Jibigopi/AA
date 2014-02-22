@@ -97,7 +97,8 @@
                                                                 
                                                                    //     return '<a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'");  ><span data-toggle="tooltip" class="label label-warning hint--top hint--error" data-hint="EDIT"><i class="icon-film"></i> </span> </a> &nbsp <a data-toggle="modal" href="#update_product"  onclick=update_product("'+oObj.aData[0]+'"); ><span data-toggle="tooltip" class="label label-success hint--top hint--error" data-hint="EDIT"><i class="icon-edit"></i></span> </a>'+"&nbsp;<a href=javascript:user_function('"+oObj.aData[0]+"'); ><span data-toggle='tooltip' class='label label-danger hint--top hint--error' data-hint='DELETE'><i class='icon-trash'></i></span> </a>";
                                                                  return '<div class="btn-group"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon icon-cog"></i>  <span class="caret"></span>   </button>   <ul class="dropdown-menu" >  \n\
-                                                                   <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Product Images</a></li> \n\
+                                                                  <li ><a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'"); >Product Image</a></li> \n\
+                                                                   <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Gallery Images</a></li> \n\
                                                                    <li ><a data-toggle="modal"  href="#set_nutrition" onclick=set_nutrition("'+oObj.aData[0]+'");>Set Nutrition</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#over_view" onclick=over_view("'+oObj.aData[0]+'"); >Over View</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#source"  onclick=source("'+oObj.aData[0]+'");  >  source</a></li> \n\
@@ -362,7 +363,22 @@
                           }
 			});
                     }
-
+   function upload_product_image(guid){
+                        $.ajax({                                      
+			  url: "<?php echo base_url() ?>index.php/grain/edit_grain/"+guid,                      
+			  data: "",     						 
+			  dataType: 'json',               
+			  success: function(data)     
+			  {
+                             
+                                 $('#upload_image #product_name').val(data[0]['gcode']);
+                                 
+                                         $('#upload_image #product_id').val(guid);
+                                
+                             
+                          }
+			});
+                    }
 	</script>	
 	</head>
 	<body class="sidebar_narrow boxed pattern_1">

@@ -129,7 +129,7 @@ class Grain Extends CI_Controller
        
 	}
  function add_new_product1(){
-        $config['upload_path'] = './uploads/';
+        $config['upload_path'] = './uploads/profile';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '22100';
 		$config['max_width']  = '11024';

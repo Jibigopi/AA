@@ -784,7 +784,17 @@ $this->cart->destroy();
         $guid=  $this->uri->segment(3);
         $this->load->model('site_model');
         $data['row']=  $this->site_model->get_page_data($guid);
-        $this->load->view('page',$data);
+        $this->load->view('product',$data);
+    }
+     function view_product_details($guid){
+       $this->load->model('menus');
+        $data['parents'] =$this->menus->get_parent_menus();
+        $data['childs'] =$this->menus->get_child_menus();
+        $data['active']= $this->uri->segment(4);
+        $guid=  $this->uri->segment(3);
+        $this->load->model('site_model');
+        $data['row']=  $this->site_model->get_product_data($guid);
+        $this->load->view('product',$data);
     }
 }
     

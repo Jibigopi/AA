@@ -234,6 +234,41 @@
                         </div>
                              </div>
                   </div>
+                        
+                        <div id="upload_image" class="modal fade">
+                           <div class="modal-dialog" >
+								<div class="modal-content">
+                                                                    <div class="modal-header">
+											<button type="button" id="image_upload_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                        <h4 class="modal-title" id="myModalLabel">Upload Image</h4>
+										</div>
+                                                              <form id="main_product_image" action="<?php echo base_url() ?>index.php/grain/add_new_product1" method="post" enctype="multipart/form-data">
+                                                                     <div class="row" >
+                                                                         <div class="col col-lg-1"></div>
+                                                                      <div class="col col-lg-4"> <br>
+                                                                          <input id="product_name" disabled="disabled" class="text-center form-control"  ></div>
+                                                                         <input type="hidden" name="product_id" id="product_id" >
+                                                                      <div class="col col-lg-4"> <br>
+                                                                             <input type="file" size="60"  name="userfile">
+                                                                             </div>
+                                                                  <div class="col col-lg-2"><br>
+                                                                      <input type="submit" class="form-control btn btn-success" value="Upload"></div>
+                                                                      </div>
+                                                                </form>
+                                                                    <br>
+<div class="row" >
+                                                                      <div class="col col-lg-4"> </div>
+                                                                      <div class="col col-lg-4 "> 
+                                                                          <div id="progress" class="text-center">
+                                                                       <div id="bar"></div>
+                                                                       <div id="percent">0%</div >
+                                                                       <div id="message"></div>
+                                                               </div>      
+                                                               </div>      
+                                                               </div><br><br>      
+                                                                </div>
+                             </div>
+                  </div>
 			<div id="footer_space"></div>
 		</div>
 
@@ -268,6 +303,7 @@ $(document).ready(function()
 
 	
 	document.getElementById('nutrition_image_close').click(); 
+	document.getElementById('image_upload_close').click(); 
 
                   
 	},
@@ -280,6 +316,7 @@ $(document).ready(function()
 }; 
 
      $("#nutrition").ajaxForm(options);
+     $("#main_product_image").ajaxForm(options);
 
 });
 </script>

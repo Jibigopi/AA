@@ -100,7 +100,7 @@
                                                                 
                    						"fnRender": function(oObj) {
                                                                 
-                                                                        return  '<img src="<?php  echo base_url()?>uploads/'+oObj.aData[9]+'" width="80px;" height="50px">';
+                                                                        return  '<img src="<?php  echo base_url()?>uploads/profile/'+oObj.aData[9]+'" width="80px;" height="50px">';
                                                                 
                                                                 },
 								

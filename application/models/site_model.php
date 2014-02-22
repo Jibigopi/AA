@@ -71,10 +71,15 @@ class Site_model extends CI_Model {
         $this->db->where('id',$guid);
         $this->db->delete('pages');
     }
-    function get_page_data($guid){
+    function get_product_data($guid){
+        $this->db->select('product_meta.*,grains.name,grains.gcode,grains.image,grains.nutrition ')->from('product_meta')->where('product_meta.product_id',$guid);
+        $this->db->join('grains','grains.guid=product_meta.product_id','left' );
+        $sql=$this->db->get();;
+        return $sql->result();
+    }
+function get_page_data($guid){
         $this->db->select()->from('pages')->where('id',$guid);
         $sql=  $this->db->get();
         return $sql->result();
     }
-
 }

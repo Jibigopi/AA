@@ -212,15 +212,15 @@ class Product_details Extends CI_Controller
 		}
         }
         function add_product_image(){
-            
-            	$this->load->model('products_details');	
-                $guid=  $this->input->post('product_id');
-		$max=$this->products_details->max_id($guid);
-                $config['upload_path'] = './uploads/product_images';
+             $config['upload_path'] = './uploads/product_images';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '202100';
 		$config['max_width']  = '11024';
 		$config['max_height']  = '3768';
+            	$this->load->model('products_details');	
+                $guid=  $this->input->post('product_id');
+		$max=$this->products_details->max_id($guid);
+               
                 $config['file_name']="An_$max";
                 $config['overwrite'] = TRUE;
 		$this->load->library('upload', $config);

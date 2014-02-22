@@ -230,8 +230,8 @@
                                                                             
                                                                         </td>
                               <td style="background: none !important;width: 221px">
-                                            <img  src='<?php echo base_url('uploads');echo '/'.$grain->image; ?>'  style="width: 200px;height: 119px;border:solid 2px #a75327"/>
-                                        	<a href="<?php echo base_url('index.php/ancientagro/product_details/').'/'.$grain->inventory_id ?>"class="btn btn-default btn-sm pull-left shopping_input agro_button">View More</a>  <input type="hidden" id="<?php echo $grain->inventory_id; ?>" name="stock_product" value="<?php echo $grain->unit;?> ">
+                                            <img  src='<?php echo base_url('uploads/profile');echo '/'.$grain->image; ?>'  style="width: 200px;height: 119px;border:solid 2px #a75327"/>
+                                        	<a href="<?php echo base_url('index.php/ancientagro/view_product_details/').'/'.$grain->inventory_id ?>"class="btn btn-default btn-sm pull-left shopping_input agro_button">View More</a>  <input type="hidden" id="<?php echo $grain->inventory_id; ?>" name="stock_product" value="<?php echo $grain->unit;?> ">
                                         </td>
                                                   <?php echo form_close(); } ?> 
                                     </tr>

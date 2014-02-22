@@ -202,7 +202,7 @@ $(document).ready(function()
 
 	document.getElementById('image_upload_close').click(); 
 	document.getElementById('image_upload_close1').click(); 
-	location.reload();
+	//location.reload();
                   
 	},
 	error: function()
