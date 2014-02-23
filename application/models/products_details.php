@@ -217,9 +217,13 @@ class Products_details extends CI_model{
         $data=array('product_id'=>$guid,'index'=>$index,'value'=>$value);
         $this->db->insert('nutrition',$data);
     }
-    function add_image($guid,$file_name){
-        $this->db->where('guid',$guid);
-        $this->db->insert('product_meta',array('product_id'=>$guid,'key'=>'image','url'=>'/uploads/product_images/','value'=>$file_name));
+    function add_image($guid,$file_name,$description){
+        
+        $this->db->insert('product_meta',array('product_id'=>$guid,'description'=>$description,'key'=>'image','url'=>'/uploads/product_images/','value'=>$file_name));
+    }
+    function update_image($guid,$file_name,$description){
+        $this->db->where('id',$guid);
+        $this->db->update('product_meta',array('description'=>$description,'key'=>'image','url'=>'/uploads/product_images/','value'=>$file_name));
     }
     function nutrition_image($guid,$file_name){
         $this->db->where('guid',$guid);

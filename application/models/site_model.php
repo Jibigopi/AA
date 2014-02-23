@@ -77,7 +77,20 @@ class Site_model extends CI_Model {
         $sql=$this->db->get();;
         return $sql->result();
     }
-function get_page_data($guid){
+    function get_items_price($guid){
+        $this->db->select('inventory_stock.*,grains.*,grains_x_sales_channel.*,sales_chanel.name as sname,sales_chanel.id as sid')->from('inventory_stock');
+        $this->db->join('grains', 'grains.guid=inventory_stock.inventory_id ','left');
+        $this->db->join('grains_x_sales_channel', 'grains.guid=grains_x_sales_channel.product_id ','left');
+        $this->db->join('sales_chanel', 'sales_chanel.id=grains_x_sales_channel.channel_id ','left');
+        $this->db->where('sales_chanel.id',9);
+        $this->db->limit(1);
+        $this->db->where('inventory_stock.inventory_id',$guid);
+        $sql=  $this->db->get();
+        return $sql->result();
+                
+                
+    }
+    function get_page_data($guid){
         $this->db->select()->from('pages')->where('id',$guid);
         $sql=  $this->db->get();
         return $sql->result();

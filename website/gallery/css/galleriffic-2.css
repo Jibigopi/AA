@@ -2,7 +2,7 @@ div.content {
 	/* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
 	display: none;
 	float: right;
-	width: 550px; 
+	width: 480px; 
         height: 500px !important;
 }
 div.content a, div.navigation a {
@@ -51,7 +51,7 @@ div.slideshow span.image-wrapper {
 }
 div.slideshow a.advance-link {
 	display: block;
-	width: 550px;
+	width: 480px;
 	height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
 	line-height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
 	text-align: center;
@@ -62,6 +62,10 @@ div.slideshow a.advance-link:hover, div.slideshow a.advance-link:active, div.sli
 div.slideshow img {
 	vertical-align: middle;
 	border: 1px solid #ccc;
+        width: 375px !important;
+        margin-top: -97px !important;
+        border: solid 4px #4f0600;
+        border-radius: 10px;
 }
 div.download {
 	float: right;
@@ -79,7 +83,9 @@ span.image-caption {
 	left: 0;
 }
 div.caption {
-	padding: 12px;
+	
+         padding: 12px;
+          margin-top: -138px;
 }
 div.image-title {
 	font-weight: bold;

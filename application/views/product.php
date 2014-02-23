@@ -178,35 +178,9 @@
              }
          }?>
         
-         <div class="row home_contant" style="margin-top:0px; ">
-             <h2 class="font " style="color: #b8682b"><?php echo $product_name ?></h2>
-             <div class="col col-lg-4 home_contant"  style='border-radius: 10px; background: url("<?php echo base_url().'css/';?>button.png") !important; background-size: 100% !important; color: #ffffff'><p style="font-size: 15px;text-align: justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <?php               foreach ($row as $data){
-                     if($data->key=='description'){
-                         echo $data->value;
-                     }
-                 }?></p>
-             </div>
-             <div class="col col-lg-5">
-                 <img src="<?php echo base_url('uploads/profile/').'/'.$Product_profile_image ?>" style="width: 335px;height: 208px;border: solid 3px #b8682b;border-radius: 10px">
-             </div>
-             <div class="col col-lg-3" style='border-radius: 10px; background: url("<?php echo base_url().'css/';?>button.png") !important; background-size: 100% !important;'>
-                 <br>
-                 <div><label class="text-center" style="width: 100%;color: #ffffff">Quantity</label>
-                       <input type="text" name="quty" id="quty" class="form-control"><br>
-                       <label class="text-center" style="width: 100%;color: #ffffff">Category</label>
-                       <select class="form-control" name="category">
-                           <option value="1">1 Pound</option>
-                           <option value="3">5 Pound</option>
-                           <option value="3">Bulk</option>
-                       </select>
-                       <input type="button" value="Add To Shopping" class="form-control shopping_input agro_button">
-                       <br>
-                   </div>
-               </div>
-         </div>
-         <div class="row home_contant" style="margin-top:15px; ">
-             
+        
+         <div class="row home_contant " style="margin-top:15px; ">
+             <h2 class="font text-center" style="color: #b8682b"><?php echo $product_name ?></h2> 
 <ul class="nav nav-tabs">
 <li class="active"><a href="#over_view" data-toggle="tab">Over View</a></li>
 <li><a href="#source" data-toggle="tab">Source</a></li>
@@ -219,32 +193,38 @@
 <div class="tab-content">
 <div id="over_view" class="tab-pane active " style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
 <div class="row">
-<div class="col col-lg-4" >
+<div class="col col-lg-5" >
+    <div class=" home_border">
                  <img src="<?php echo base_url('uploads/profile/').'/'.$Product_profile_image ?>" style=" margin: 31px auto;width: 250px;height: 149px;border: solid 3px #b8682b;border-radius: 10px">
-             </div>
-<div class="col col-lg-8">
+ </div>
+    </div>
+<div class="col col-lg-7">
     <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $over_view ?></p>
 </div>
 </div>
 </div>
 <div id="Nutrition" class="tab-pane " style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
-<div class="col-lg-12 text-center"><img src="<?php echo base_url('uploads/nutrition/')."/".$nutrition ;?>" alt="" /></div>
-</div>
+    
+    <div class="col-lg-12 text-center"><div class=" home_border" style=" padding: 35px 43px !important"><img src="<?php echo base_url('uploads/nutrition/')."/".$nutrition ;?>" alt="" style="border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;" /></div>
+</div></div>
 <div id="source" class="tab-pane" style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
 <div class="row">
 
-<div class="col col-lg-8">
+<div class="col col-lg-7">
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $source ?></p>;
 </div>
-    <div class="col col-lg-4" >
+   <div class="col col-lg-5" >
+    <div class=" home_border">
                  <img src="<?php echo base_url('uploads/profile/').'/'.$Product_profile_image ?>" style=" margin: 31px auto;width: 250px;height: 149px;border: solid 3px #b8682b;border-radius: 10px">
-             </div>
+ </div>
+    </div>
 </div>
 </div>
 <div id="media" class="tab-pane" style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
 <div class="row">
 
-    <div class="col col-lg-8" >
+    <div class="col col-lg-1" ></div>
+    <div class="col col-lg-6" >
     
     
     <!-- Start Advanced Gallery Html Containers -->
@@ -255,7 +235,9 @@
 						<div id="loading" class="loader"></div>
 						<div id="slideshow" class="slideshow"></div>
 					</div>
-					<div id="caption" class="caption-container"></div>
+					<div id="caption" class="caption-container">
+                                            
+                                        </div>
 				</div>
                                          </div>
     <div class="col col-lg-4">
@@ -269,17 +251,21 @@
             <a class="thumb" href="<?php echo base_url().$image->url.$image->value; ?>" title="Title #4" style="width: 100% !important;height: 75% !important;" >
                 <img src="<?php echo base_url().$image->url.$image->value; ?>" alt="Title #4" style="width: 75px !important;height: 75px !important;" />
             </a>
-            <div class="caption">
+            <div class="caption pull-right">
 
-                    <div class="image-title">Title #4</div>
-                    <div class="image-desc">Description</div>
+                   
+                    <div class="image-desc" style="color: #000"><?php echo $image->description  ?></div>
             </div>
     </li>
+    
     <?php }
 } ?>
-						
+				
+    
 					</ul>
-				</div></div>
+				</div>
+        
+    </div>
    
     </div>
 </div>
@@ -302,7 +288,7 @@
 				// Initialize Advanced Galleriffic Gallery
 				var gallery = $('#thumbs').galleriffic({
 					delay:                     2500,
-					numThumbs:                 15,
+					numThumbs:                 9,
 					preloadAhead:              10,
 					enableTopPager:            true,
 					enableBottomPager:         true,
@@ -313,12 +299,12 @@
 					loadingContainerSel:       '#loading',
 					renderSSControls:          true,
 					renderNavControls:         true,
-					playLinkText:              'Play Slideshow',
-					pauseLinkText:             'Pause Slideshow',
-					prevLinkText:              '&lsaquo; Previous Photo',
-					nextLinkText:              'Next Photo &rsaquo;',
-					nextPageLinkText:          'Next &rsaquo;',
-					prevPageLinkText:          '&lsaquo; Prev',
+					//playLinkText:              'Play Slideshow',
+					//pauseLinkText:             'Pause Slideshow',
+					//prevLinkText:              '&lsaquo; Previous Photo',
+					//nextLinkText:              'Next Photo &rsaquo;',
+					//nextPageLinkText:          'Next &rsaquo;',
+					//prevPageLinkText:          '&lsaquo; Prev',
 					enableHistory:             false,
 					autoStart:                 false,
 					syncTransitions:           true,
@@ -354,25 +340,62 @@
 
 <div id="benefits" class="tab-pane" style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
 <div class="row">
-<div class="col col-lg-4" >
+<div class="col col-lg-5" >
+    <div class=" home_border">
                  <img src="<?php echo base_url('uploads/profile/').'/'.$Product_profile_image ?>" style=" margin: 31px auto;width: 250px;height: 149px;border: solid 3px #b8682b;border-radius: 10px">
-             </div>
-<div class="col col-lg-8">
+ </div>
+    </div>
+<div class="col col-lg-7">
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $benefits ?></p>;
 </div>
 </div>
 </div>
 <div id="Culinary"  class="tab-pane" style='border-radius:10px; border-top: solid #b8682b; border-bottom: solid #b8682b;'>
 <div class="row">
-<div class="col col-lg-4" >
+<div class="col col-lg-5" >
+    <div class=" home_border">
                  <img src="<?php echo base_url('uploads/profile/').'/'.$Product_profile_image ?>" style=" margin: 31px auto;width: 250px;height: 149px;border: solid 3px #b8682b;border-radius: 10px">
- 
+ </div>
     </div>
-<div class="col col-lg-8">  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $culinary ?></p></div>
+<div class="col col-lg-7">  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $culinary ?></p></div>
 </div>
    
 
          </div></div>
+         </div>
+          <div class="row home_contant" style="margin-top:0px; ">
+             <h2 class="font" style="color: #b8682b"><?php echo $product_name ?></h2> 
+             <div class="col col-lg-7 home_contant home_panel"  style='border-radius: 10px;  color: #ffffff'><p style="font-size: 15px;text-align: justify;color: #ffffff;font-weight: bold;font-family: verdana;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <?php               foreach ($row as $data){
+                     if($data->key=='description'){
+                         echo $data->value;
+                     }
+                 }?></p>
+             </div>
+             <div class="col col-lg-2"></div>
+             <div class="col col-lg-3 home_panel" style='border-radius: 10px;'>
+                 <br>
+                 <?php echo form_open('ancientagro/shopping'); 
+ foreach ($stock as $product){
+                 ?>  
+                                        
+                 <div><label class="text-center" style="width: 100%;color: #ffffff">Price</label><br>
+                     <input type="text" disabled="disabled" value="<?php echo $product->unit_price ?>" class="form-control"><br>
+                     <input type="hidden" name="id" value="<?php echo $product->id ?>" class="form-control">
+                     <input type="hidden" name="name" value="<?php echo $product->name ?>" class="form-control">
+                     <input type="hidden" name="price"  value="<?php echo $product->unit_price ?>" class="form-control">
+                       <label class="text-center" style="width: 100%;color: #ffffff">Category</label>
+                       <select class="form-control" name="category">
+                           <option value="1">1 Pound</option>
+                           <option value="5">5 Pound</option>
+                           <option value="bulk">Bulk</option>
+                       </select>
+                       <input type="button" value="Add To Shopping" class="form-control shopping_input agro_button">
+                       <br>
+                   </div>
+ <?php } echo form_close(); ?>  
+                                        
+               </div>
          </div>
          <br><br><div class="fotter fancy_font" style="height: 160px;background:url(<?php echo base_url() ?>images/Footer_Img.png) ;color: #ffffff; ">
              <div class="row">

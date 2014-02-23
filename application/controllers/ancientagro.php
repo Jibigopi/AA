@@ -793,6 +793,7 @@ $this->cart->destroy();
         $data['active']= $this->uri->segment(4);
         $guid=  $this->uri->segment(3);
         $this->load->model('site_model');
+        $data['stock']=  $this->site_model->get_items_price($guid);
         $data['row']=  $this->site_model->get_product_data($guid);
         $this->load->view('product',$data);
     }

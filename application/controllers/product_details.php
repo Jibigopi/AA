@@ -206,9 +206,10 @@ class Product_details Extends CI_Controller
 		else
 		{       $upload_data = $this->upload->data();
                      $file_name =$upload_data['file_name'];
-                     $guid=  $this->input->post('product_id');
-                      $this->load->model('grains');
-                      $this->grains->add_image($guid,$file_name);
+                   echo  $id=  $this->input->post('meta_id');
+                      $this->load->model('products_details');
+                      $description=  $this->input->post('description');
+                      $this->products_details->update_image($id,$file_name,$description);
 		}
         }
         function add_product_image(){
@@ -234,7 +235,8 @@ class Product_details Extends CI_Controller
                      $file_name =$upload_data['file_name'];
                     
                       $this->load->model('grains');
-                      $this->products_details->add_image($guid,$file_name);
+                      $description=  $this->input->post('description');
+                      $this->products_details->add_image($guid,$file_name,$description);
 		}
         }
         function remove_image(){

@@ -4,6 +4,9 @@ function change_image(id,value,url){
    
     document.getElementById('selected_productimage').src = base_url+url+value;
     $('#myForm1 #image_name').val(value);
+    $('#myForm1 #meta_id').val(id);
+    $('#myForm1 #description').val($('#image_table #'+id+'_description ').val());
+    console.log($('#image_table #'+id+'_description ').val());
 }
 
 function add_new_image(){
@@ -55,7 +58,8 @@ function delete_image(guid,name){
 									<table id="image_table" class="table table-striped" style="width: 100%"><thead>
                                                                         <tr>
                                                                           <th>No</th>
-                                                                          <th >image</th>
+                                                                          <th >Image</th>
+                                                                          <th >Description </th>
                                                                           
                                                                           <th width="100px">Change</th>
                                                                           <th width="100px">Delete</th>
@@ -67,6 +71,7 @@ function delete_image(guid,name){
                                                                             <tr>
                                                                                 <td><?php echo $i++;?></td>
                                                                                 <td><img width="100" height="75" src="<?php echo base_url(); ?><?php echo $m_row->url.$m_row->value ?>"/></td>
+                                                                                <td><input type="hidden" id="<?php echo $m_row->id.'_description'; ?>" value="<?php echo $m_row->description  ?>"><?php echo $m_row->description  ?></td>
                                                                                 <td><a  data-toggle="modal" href="#change_image" onclick="change_image(<?php echo $m_row->id.",'".$m_row->value."','".$m_row->url."'" ?> )"><i class="icon icon-edit"></i></a></td>
                                                                                 <td><a href="javascript:delete_image(<?php echo $m_row->id; ?>,'<?php echo $m_row->value ?>')"><i class="icon icon-remove"></i></a></td>
                                                                             </tr>   
@@ -109,9 +114,16 @@ function delete_image(guid,name){
                                                                       <div class="col col-lg-4"> <br>
                                                                              <input type="file" size="60"  name="userfile">
                                                                              </div>
-                                                                  <div class="col col-lg-2"><br>
-                                                                      <input type="submit" class="form-control btn btn-success" value="Upload"></div>
+                                                                  <div class="col col-lg-4"><br>
+                                                                      <input type="submit" class="form-control btn btn-success" value="Upload /Save"></div>
                                                                       </div>
+                                                                  <div class="row">
+                                                                      <div class="col col-lg-1"></div>
+                                                                      <div class="col col-lg-10">
+                                                                          <label>Description</label>
+                                                                          <textarea name="description" id='description' rows="4" class="form-control"></textarea>
+                                                                      </div>
+                                                                  </div>
                                                                 </form>
                                                                     <br>
 <div class="row" >
@@ -144,15 +156,28 @@ function delete_image(guid,name){
                                                                      <div class="row" >
                                                                          <div class="col col-lg-1"></div>
                                                                       <div class="col col-lg-4"> <br>
-                                                                          <input id="product_name" disabled="disabled" class="text-center form-control"  ></div>
+                                                                          <input type="hidden" id="product_name" disabled="disabled" class="text-center form-control"  ></div>
                                                                          <input type="hidden" name="product_id" id="product_id" >
                                                                          <input type="hidden" name="image_name" id="image_name" >
+                                                                         <input type="text" name="meta_id" id="meta_id" >
                                                                       <div class="col col-lg-4"> <br>
                                                                              <input type="file" size="60"  name="userfile">
                                                                              </div>
-                                                                  <div class="col col-lg-2"><br>
-                                                                      <input type="submit" class="form-control btn btn-success" value="Upload"></div>
+                                                                  
                                                                       </div>
+                                                                  <div class="row">
+                                                                      <div class="col col-lg-1"></div>
+                                                                      <div class="col col-lg-10">
+                                                                          <label>Description</label>
+                                                                          <textarea name="description" id='description' rows="4" class="form-control"></textarea>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="row">
+                                                                      <div class="col col-lg-1"></div>
+                                                                      <div class="col col-lg-10">
+                                                                          <br>
+                                                                      <input type="submit" class="form-control btn btn-success" value="Upload / Save"> </div>
+                                                                  </div>
                                                                 </form>
                                                                     <br>
 <div class="row" >
@@ -202,7 +227,7 @@ $(document).ready(function()
 
 	document.getElementById('image_upload_close').click(); 
 	document.getElementById('image_upload_close1').click(); 
-	//location.reload();
+	location.reload();
                   
 	},
 	error: function()
