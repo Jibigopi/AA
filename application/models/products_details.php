@@ -132,6 +132,11 @@ class Products_details extends CI_model{
         $sql=  $this->db->get();
         return $sql->result();
     }
+    function get_product_certificate($guid){
+        $this->db->select()->from('product_meta')->where('key','certificate')->where('product_id',$guid);
+        $sql=  $this->db->get();
+        return $sql->result();
+    }
             
     function get_sales_channel($guid){
         $this->db->select()->from('grains')->where('guid',$guid);
@@ -220,6 +225,14 @@ class Products_details extends CI_model{
     function add_image($guid,$file_name,$description){
         
         $this->db->insert('product_meta',array('product_id'=>$guid,'description'=>$description,'key'=>'image','url'=>'/uploads/product_images/','value'=>$file_name));
+    }
+    function add_certificate($guid,$file_name,$description){
+        
+        $this->db->insert('product_meta',array('product_id'=>$guid,'description'=>$description,'key'=>'certificate','url'=>'/uploads/product_certificate/','value'=>$file_name));
+    }
+    function update_certificate($guid,$file_name,$description){
+        $this->db->where('id',$guid);
+        $this->db->update('product_meta',array('description'=>$description,'key'=>'certificate','url'=>'/uploads/product_certificate/','value'=>$file_name));
     }
     function update_image($guid,$file_name,$description){
         $this->db->where('id',$guid);

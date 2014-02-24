@@ -43,7 +43,7 @@ function delete_image(guid,name){
 			<section class="container clearfix main_section">
 				<div id="main_content_outer" class="clearfix">
 					<div id="main_content">
-                                            <?php foreach ($pro as $product){ echo '<h4>'.$product->name.' Images   </h4>';
+                                            <?php foreach ($pro as $product){ echo '<h4>'.$product->name.' Certificate   </h4>';
                                              echo "<input type='hidden' id='product_id' value='$product->guid' name='product_id'>"       ;
                                             }?>
 						<!-- main content -->
@@ -104,7 +104,7 @@ function delete_image(guid,name){
 											<button type="button" id="image_upload_close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                                                         <h4 class="modal-title" id="myModalLabel">Upload Image</h4>
 										</div>
-                                                              <form id="myForm2" action="<?php echo base_url() ?>index.php/product_details/add_product_image" method="post" enctype="multipart/form-data">
+                                                              <form id="myForm2" action="<?php echo base_url() ?>index.php/product_details/add_product_certificate" method="post" enctype="multipart/form-data">
                                                                      
                                                                      <div class="row" >
                                                                          <div class="col col-lg-1"></div>
@@ -146,7 +146,7 @@ function delete_image(guid,name){
 											<button type="button" id="image_upload_close1" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                                                         <h4 class="modal-title" id="myModalLabel">Upload Image</h4>
 										</div>
-                                                              <form id="myForm1" action="<?php echo base_url() ?>index.php/product_details/change_product_image" method="post" enctype="multipart/form-data">
+                                                              <form id="myForm1" action="<?php echo base_url() ?>index.php/product_details/change_product_certificate" method="post" enctype="multipart/form-data">
                                                                      <div class="row" >
                                                                          <div class="col col-lg-1"></div>
                                                                          <div class="col col-lg-10">

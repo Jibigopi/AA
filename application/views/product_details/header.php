@@ -99,6 +99,7 @@
                                                                  return '<div class="btn-group"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon icon-cog"></i>  <span class="caret"></span>   </button>   <ul class="dropdown-menu" >  \n\
                                                                   <li ><a data-toggle="modal" href="#upload_image" onclick=upload_product_image("'+oObj.aData[0]+'"); >Product Image</a></li> \n\
                                                                    <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_images/'+oObj.aData[0]+'" >Gallery Images</a></li> \n\
+                                                                   <li ><a   href="<?php echo base_url() ?>index.php/product_details/product_certificate/'+oObj.aData[0]+'" >Certificate</a></li> \n\
                                                                    <li ><a data-toggle="modal"  href="#set_nutrition" onclick=set_nutrition("'+oObj.aData[0]+'");>Set Nutrition</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#over_view" onclick=over_view("'+oObj.aData[0]+'"); >Over View</a></li> \n\
                                                                    <li ><a data-toggle="modal" href="#source"  onclick=source("'+oObj.aData[0]+'");  >  source</a></li> \n\

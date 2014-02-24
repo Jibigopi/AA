@@ -189,6 +189,28 @@ class Product_details Extends CI_Controller
          }
             
         }
+        function product_certificate($guid){
+            if(isset($_SESSION['user']) && isset($_SESSION['user_type'])){
+            if($_SESSION['user_type']=='admin'){
+                 $data['product_id']=$guid;
+                $this->load->view('product_details/image_header',$data);
+		$this->load->view('nav/index');
+                $this->load->model('products_details');
+               
+                $data['pro']=  $this->products_details->get_product($guid);
+                $data['row']=  $this->products_details->get_product_certificate($guid);
+                
+                
+		$this->load->view('product_details/certificate',$data);
+                $this->load->view('product_details/footer');
+              }else{
+                redirect('ancientagro/dashboard');  
+            }            
+            }else{
+                redirect('admin');
+         }
+            
+        }
         function change_product_image(){
             $config['upload_path'] = './uploads/product_images';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -210,6 +232,29 @@ class Product_details Extends CI_Controller
                       $this->load->model('products_details');
                       $description=  $this->input->post('description');
                       $this->products_details->update_image($id,$file_name,$description);
+		}
+        }
+        function change_product_certificate(){
+            $config['upload_path'] = './uploads/product_certificate';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '202100';
+		$config['max_width']  = '11024';
+		$config['max_height']  = '3768';
+                $config['file_name']=$this->input->post('image_name');
+                $config['overwrite'] = TRUE;
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+                        echo $this->upload->display_errors();
+		}
+		else
+		{       $upload_data = $this->upload->data();
+                     $file_name =$upload_data['file_name'];
+                   echo  $id=  $this->input->post('meta_id');
+                      $this->load->model('products_details');
+                      $description=  $this->input->post('description');
+                      $this->products_details->update_certificate($id,$file_name,$description);
 		}
         }
         function add_product_image(){
@@ -237,6 +282,33 @@ class Product_details Extends CI_Controller
                       $this->load->model('grains');
                       $description=  $this->input->post('description');
                       $this->products_details->add_image($guid,$file_name,$description);
+		}
+        }
+        function add_product_certificate(){
+             $config['upload_path'] = './uploads/product_certificate';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '202100';
+		$config['max_width']  = '11024';
+		$config['max_height']  = '3768';
+            	$this->load->model('products_details');	
+                $guid=  $this->input->post('product_id');
+		$max=$this->products_details->max_id($guid);
+               
+                $config['file_name']="An_$max";
+                $config['overwrite'] = TRUE;
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+                        echo $this->upload->display_errors();
+		}
+		else
+		{       $upload_data = $this->upload->data();
+                     $file_name =$upload_data['file_name'];
+                    
+                      $this->load->model('grains');
+                      $description=  $this->input->post('description');
+                      $this->products_details->add_certificate($guid,$file_name,$description);
 		}
         }
         function remove_image(){
